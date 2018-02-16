@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Iegor Rudnytskyi" />
+
+<meta name="date" content="2018-02-16" />
+
+<title>Introduction to estudy2</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+a.sourceLine { display: inline-block; min-height: 1.25em; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; }
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; color: initial; }
+}
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.bn { color: #40a070; } /* BaseN */
+code span.fl { color: #40a070; } /* Float */
+code span.ch { color: #4070a0; } /* Char */
+code span.st { color: #4070a0; } /* String */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.ot { color: #007020; } /* Other */
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.fu { color: #06287e; } /* Function */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code span.cn { color: #880000; } /* Constant */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.im { } /* Import */
+code span.va { color: #19177c; } /* Variable */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.op { color: #666666; } /* Operator */
+code span.bu { } /* BuiltIn */
+code span.ex { } /* Extension */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.at { color: #7d9029; } /* Attribute */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Introduction to estudy2</h1>
+<h4 class="author"><em>Iegor Rudnytskyi</em></h4>
+<h4 class="date"><em>2018-02-16</em></h4>
+
+
+
+<section id="introduction" class="level2">
+<h2>Introduction</h2>
+<p>The <code>estduy2</code> package is an implementation of an event study methodology. The event study is a statistical toolbox that allows examining the impact of certain events on the stock valuation of companies. The idea of the event study is to compare the market valuation of companies during an event-free period (called the estimation period) and a period when an event happened (the event period).</p>
+<p>In order to complete a full event study one has to:</p>
+<ul>
+<li><p>Select companies of interest</p></li>
+<li><p>Select dates of the event and the estimation periods</p></li>
+<li><p>Obtain prices of companies’ stocks</p></li>
+<li><p>Compute rates of return</p></li>
+<li><p>Fit a market model to the data</p></li>
+<li><p>Test the expected returns against observed returns of companies</p></li>
+</ul>
+<p>The <code>estudy2</code> package provides a set of functions to cover these steps. Functions’ names are self-explanatory and functions should be called consecutively in the following order:</p>
+<ul>
+<li><p><code>get_prices_from_tickers</code> returns daily prices for given tickers</p></li>
+<li><p><code>get_rates_from_prices</code> computes rates of returns from prices</p></li>
+<li><p><code>apply_market_model</code> fits a market model to rates of returns data</p></li>
+<li><p><code>parametric_tests</code> and <code>nonparametric_tests</code> performs parametric and nonparametric tests, respectively</p></li>
+</ul>
+<p>The package is designed to work with one of the data types, namely <code>zoo</code>, <code>list</code>, or <code>data.frame</code> depending on user preference.</p>
+<p>The purpose of this vignette is to provide a brief introduction of how to use this package. The illustrative example is the analysis of the impact of 9/11 terrorist attacks on World Trading Center on nine European insurance companies.</p>
+</section>
+<section id="obtaining-prices-of-companies-stocks" class="level2">
+<h2>Obtaining prices of companies’ stocks</h2>
+<p>We select nine European insurance companies, tickers of which are listed in the code snippet below. The starting and ending date are set to <code>&quot;2000-01-01&quot;</code> and <code>&quot;2002-01-01&quot;</code>, respectively, in order to include both the estimation and the event periods. Then, prices of securities should be downloaded. The function <code>get_prices_from_tickers</code> downloads prices for companies’ tickers between <code>start</code> and <code>end</code> date. Under the hood, this function is a wrapper around <code>get.hist.quote</code> from <code>tseries</code>. The function can return either Open or Close quote (<code>quote</code> argument). Also one has to choose the returning class among <code>&quot;list&quot;</code>, <code>&quot;zoo&quot;</code>, and <code>&quot;data.frame&quot;</code>. Further in the vignette we use <code>zoo</code> objects. We download historical prices of companies with:</p>
+<pre class="sourceCode r" id="cb1"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(estudy2)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">tickers &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ALV.DE&quot;</span>, <span class="st">&quot;CS.PA&quot;</span>, <span class="st">&quot;ELE.PA&quot;</span>, <span class="st">&quot;G.MI&quot;</span>, <span class="st">&quot;HNR1.HA&quot;</span>, <span class="st">&quot;HSX.L&quot;</span>,</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">             <span class="st">&quot;MUV2.DE&quot;</span>, <span class="st">&quot;RSA.L&quot;</span>, <span class="st">&quot;TOP.CO&quot;</span>)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">prices &lt;-<span class="st"> </span><span class="kw">get_prices_from_tickers</span>(tickers, </a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">                                  <span class="dt">start =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2000-01-01&quot;</span>),</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">                                  <span class="dt">end =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2002-01-01&quot;</span>),</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">                                  <span class="dt">quote =</span> <span class="st">&quot;Close&quot;</span>,</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">                                  <span class="dt">retclass =</span> <span class="st">&quot;zoo&quot;</span>)</a></code></pre>
+<p>For using a single-index market model we also need to download prices of an index (proxy):</p>
+<pre class="sourceCode r" id="cb2"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">prices_indx &lt;-<span class="st"> </span><span class="kw">get_prices_from_tickers</span>(<span class="st">&quot;^STOXX50E&quot;</span>,</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">                                       <span class="dt">start =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2000-01-01&quot;</span>),</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">                                       <span class="dt">end =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2002-01-01&quot;</span>),</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">                                       <span class="dt">quote =</span> <span class="st">&quot;Close&quot;</span>,</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">                                       <span class="dt">retclass =</span> <span class="st">&quot;zoo&quot;</span>)</a></code></pre>
+</section>
+<section id="computing-rates-of-returns-from-prices" class="level2">
+<h2>Computing rates of returns from prices</h2>
+<p>Now we need to compute rates of returns form companies’ prices. For this purpose the function <code>get_rates_from_prices</code> is used, which is an S3 generic function dispatched on <code>prices</code> argument allowing for <code>list</code>, <code>zoo</code>, and <code>data.frame</code> (the same classes which <code>get_prices_from_tickers</code> returns). The function computes rates of returns of given prices using either continuous or discrete compounding depending on <code>compounding</code> argument value. Furthermore, setting <code>multi_day</code> to <code>TRUE</code> allows for rates of returns between non-consecutive days (for instance, Friday - Monday rate of return). We calculate rates of returns of companies and the index by:</p>
+<pre class="sourceCode r" id="cb3"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">rates &lt;-<span class="st"> </span><span class="kw">get_rates_from_prices</span>(prices,</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">                               <span class="dt">quote =</span> <span class="st">&quot;Close&quot;</span>,</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">                               <span class="dt">multi_day =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">                               <span class="dt">compounding =</span> <span class="st">&quot;continuous&quot;</span>)</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">rates_indx &lt;-<span class="st"> </span><span class="kw">get_rates_from_prices</span>(prices_indx, </a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">                                    <span class="dt">quote =</span> <span class="st">&quot;Close&quot;</span>,</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">                                    <span class="dt">multi_day =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">                                    <span class="dt">compounding =</span> <span class="st">&quot;continuous&quot;</span>)</a></code></pre>
+</section>
+<section id="applying-a-market-model" class="level2">
+<h2>Applying a market model</h2>
+<p>To calculate expected rates of returns during the event period we need to train a market model based on date from the estimation period. <code>apply_market_model</code> goes over each company (column) in <code>rates</code> and calibrates a chosen model. The function returns a list of S3 <code>returns</code> class objects, which can be passed to <code>parametric_tests</code> and <code>nonparametric_tests</code>. For our case we use the single-index market model:</p>
+<pre class="sourceCode r" id="cb4"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">securities_returns &lt;-<span class="st"> </span><span class="kw">apply_market_model</span>(</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">    <span class="dt">rates =</span> rates,</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">    <span class="dt">regressor =</span> rates_indx,</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">    <span class="dt">same_regressor_for_all =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">    <span class="dt">market_model =</span> <span class="st">&quot;sim&quot;</span>,</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">    <span class="dt">estimation_method =</span> <span class="st">&quot;ols&quot;</span>,</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">    <span class="dt">estimation_start =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2001-03-26&quot;</span>),</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">    <span class="dt">estimation_end =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2001-09-10&quot;</span>)</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">)</a></code></pre>
+</section>
+<section id="tests" class="level2">
+<h2>Tests</h2>
+<p>The event study utilizes both parametric and nonparametric tests. Parametric tests are Brown and Warner (1980), Brown and Warner (1985), t-test, Patell (1976), Boehmer (1991), and Lamb (1995) tests. To avoid calling all these tests separately, one can call <code>parametric_tests</code> with <code>all = TRUE</code>. The same applies to nonparametric tests, i.e. simple binomial sign, binomial sign, Corrado (1992), rank, modified rank, and Wilcoxon signed rank tests can be called all at once by specifying <code>all = TRUE</code> in <code>nonparametric_tests</code>. These tests are also available separately. Both functions return data frames with statistics and significance for each date in the event period. See <code>?parametric_tests</code> and <code>?nonparametric_tests</code> for references and more details.</p>
+<pre class="sourceCode r" id="cb5"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">parametric_tests</span>(<span class="dt">list_of_returns =</span> securities_returns,</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">                 <span class="dt">event_start =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2001-09-11&quot;</span>),</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">                 <span class="dt">event_end =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2001-09-28&quot;</span>))</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;          date   weekday percentage         mean bw_1980_stat</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; 1  2001-09-11   Tuesday  100.00000 -0.066128111  -10.1906149</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; 2  2001-09-12 Wednesday  100.00000 -0.049936807   -7.6954681</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; 3  2001-09-13  Thursday  100.00000 -0.001707745   -0.2631705</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; 4  2001-09-14    Friday   88.88889 -0.002677241   -0.4125738</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; 5  2001-09-17    Monday   88.88889 -0.018438786   -2.8414931</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; 6  2001-09-18   Tuesday  100.00000 -0.026636469   -4.1047898</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; 7  2001-09-19 Wednesday  100.00000 -0.001428428   -0.2201266</span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt; 8  2001-09-20  Thursday  100.00000 -0.088364673  -13.6173610</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; 9  2001-09-21    Friday  100.00000 -0.040885394   -6.3006081</span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; 10 2001-09-24    Monday  100.00000  0.028500884    4.3921039</span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; 11 2001-09-25   Tuesday   88.88889  0.044739187    6.8944934</span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; 12 2001-09-26 Wednesday  100.00000  0.024972966    3.8484371</span></a>
+<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt; 13 2001-09-27  Thursday   88.88889  0.006571196    1.0126485</span></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt; 14 2001-09-28    Friday   66.66667  0.010468462    1.6132333</span></a>
+<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">#&gt;    bw_1980_signif bw_1985_stat bw_1985_signif t_test_stat t_test_signif</span></a>
+<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co">#&gt; 1             ***   -8.6929624            *** -4.67445588           ***</span></a>
+<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="co">#&gt; 2             ***   -6.5645121            *** -2.25296134             *</span></a>
+<a class="sourceLine" id="cb5-22" data-line-number="22"><span class="co">#&gt; 3                   -0.2244940                -0.09710898              </span></a>
+<a class="sourceLine" id="cb5-23" data-line-number="23"><span class="co">#&gt; 4                   -0.3519404                -0.36440723              </span></a>
+<a class="sourceLine" id="cb5-24" data-line-number="24"><span class="co">#&gt; 5             ***   -2.4238962             ** -1.32077129              </span></a>
+<a class="sourceLine" id="cb5-25" data-line-number="25"><span class="co">#&gt; 6             ***   -3.5015339            *** -0.91365511              </span></a>
+<a class="sourceLine" id="cb5-26" data-line-number="26"><span class="co">#&gt; 7                   -0.1877760                -0.08556526              </span></a>
+<a class="sourceLine" id="cb5-27" data-line-number="27"><span class="co">#&gt; 8             ***  -11.6161005            *** -2.68780442            **</span></a>
+<a class="sourceLine" id="cb5-28" data-line-number="28"><span class="co">#&gt; 9             ***   -5.3746461            *** -3.39909159           ***</span></a>
+<a class="sourceLine" id="cb5-29" data-line-number="29"><span class="co">#&gt; 10            ***    3.7466232            ***  1.80302526              </span></a>
+<a class="sourceLine" id="cb5-30" data-line-number="30"><span class="co">#&gt; 11            ***    5.8812517            ***  2.41071860            **</span></a>
+<a class="sourceLine" id="cb5-31" data-line-number="31"><span class="co">#&gt; 12            ***    3.2828558            ***  2.61312810            **</span></a>
+<a class="sourceLine" id="cb5-32" data-line-number="32"><span class="co">#&gt; 13                   0.8638257                 0.47984929              </span></a>
+<a class="sourceLine" id="cb5-33" data-line-number="33"><span class="co">#&gt; 14                   1.3761462                 1.96648116              </span></a>
+<a class="sourceLine" id="cb5-34" data-line-number="34"><span class="co">#&gt;        pt_stat pt_signif     bh_stat bh_signif    lmb_stat lmb_signif</span></a>
+<a class="sourceLine" id="cb5-35" data-line-number="35"><span class="co">#&gt; 1  -10.3503980       *** -3.74403346       ***  -7.9328026        ***</span></a>
+<a class="sourceLine" id="cb5-36" data-line-number="36"><span class="co">#&gt; 2   -6.4404759       *** -2.04059203         *  -6.5076507        ***</span></a>
+<a class="sourceLine" id="cb5-37" data-line-number="37"><span class="co">#&gt; 3    0.4918207            0.18346237            -0.2228620           </span></a>
+<a class="sourceLine" id="cb5-38" data-line-number="38"><span class="co">#&gt; 4   -0.5526616           -0.53195164            -0.3232837           </span></a>
+<a class="sourceLine" id="cb5-39" data-line-number="39"><span class="co">#&gt; 5   -1.9038654         * -0.94632323            -2.3404300         **</span></a>
+<a class="sourceLine" id="cb5-40" data-line-number="40"><span class="co">#&gt; 6   -3.7810357       *** -0.81240586            -3.4851889        ***</span></a>
+<a class="sourceLine" id="cb5-41" data-line-number="41"><span class="co">#&gt; 7    0.1861697            0.08124111            -0.1842279           </span></a>
+<a class="sourceLine" id="cb5-42" data-line-number="42"><span class="co">#&gt; 8  -12.5718392       *** -3.07489416        ** -11.0921628        ***</span></a>
+<a class="sourceLine" id="cb5-43" data-line-number="43"><span class="co">#&gt; 9   -5.9096801       *** -3.10291189        **  -5.2481103        ***</span></a>
+<a class="sourceLine" id="cb5-44" data-line-number="44"><span class="co">#&gt; 10   3.7856712       ***  1.56656947             3.4155827        ***</span></a>
+<a class="sourceLine" id="cb5-45" data-line-number="45"><span class="co">#&gt; 11   6.7235501       ***  2.50140550        **   5.8414886        ***</span></a>
+<a class="sourceLine" id="cb5-46" data-line-number="46"><span class="co">#&gt; 12   3.8267266       ***  2.68293201        **   3.2379910        ***</span></a>
+<a class="sourceLine" id="cb5-47" data-line-number="47"><span class="co">#&gt; 13   1.6332431            0.72948299             0.8557798           </span></a>
+<a class="sourceLine" id="cb5-48" data-line-number="48"><span class="co">#&gt; 14   1.6040969            2.04644703         *   1.3405560</span></a>
+<a class="sourceLine" id="cb5-49" data-line-number="49"></a>
+<a class="sourceLine" id="cb5-50" data-line-number="50"><span class="kw">nonparametric_tests</span>(<span class="dt">list_of_returns =</span> securities_returns,</a>
+<a class="sourceLine" id="cb5-51" data-line-number="51">                    <span class="dt">event_start =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2001-09-11&quot;</span>),</a>
+<a class="sourceLine" id="cb5-52" data-line-number="52">                    <span class="dt">event_end =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2001-09-28&quot;</span>))</a>
+<a class="sourceLine" id="cb5-53" data-line-number="53"><span class="co">#&gt;          date   weekday percentage  sign_stat sign_signif gsign_stat</span></a>
+<a class="sourceLine" id="cb5-54" data-line-number="54"><span class="co">#&gt; 1  2001-09-11   Tuesday  100.00000 -3.0000000         *** -3.0148149</span></a>
+<a class="sourceLine" id="cb5-55" data-line-number="55"><span class="co">#&gt; 2  2001-09-12 Wednesday  100.00000 -1.6666667           * -1.6814654</span></a>
+<a class="sourceLine" id="cb5-56" data-line-number="56"><span class="co">#&gt; 3  2001-09-13  Thursday  100.00000 -0.3333333             -0.3481159</span></a>
+<a class="sourceLine" id="cb5-57" data-line-number="57"><span class="co">#&gt; 4  2001-09-14    Friday   88.88889 -0.4419417             -0.4558804</span></a>
+<a class="sourceLine" id="cb5-58" data-line-number="58"><span class="co">#&gt; 5  2001-09-17    Monday   88.88889  0.3535534              0.3396244</span></a>
+<a class="sourceLine" id="cb5-59" data-line-number="59"><span class="co">#&gt; 6  2001-09-18   Tuesday  100.00000 -0.3333333             -0.3481159</span></a>
+<a class="sourceLine" id="cb5-60" data-line-number="60"><span class="co">#&gt; 7  2001-09-19 Wednesday  100.00000 -0.3333333             -0.3481159</span></a>
+<a class="sourceLine" id="cb5-61" data-line-number="61"><span class="co">#&gt; 8  2001-09-20  Thursday  100.00000 -3.0000000         *** -3.0148149</span></a>
+<a class="sourceLine" id="cb5-62" data-line-number="62"><span class="co">#&gt; 9  2001-09-21    Friday  100.00000 -1.6666667           * -1.6814654</span></a>
+<a class="sourceLine" id="cb5-63" data-line-number="63"><span class="co">#&gt; 10 2001-09-24    Monday  100.00000  1.6666667           *  1.6519084</span></a>
+<a class="sourceLine" id="cb5-64" data-line-number="64"><span class="co">#&gt; 11 2001-09-25   Tuesday   88.88889  1.9445436           *  1.9306339</span></a>
+<a class="sourceLine" id="cb5-65" data-line-number="65"><span class="co">#&gt; 12 2001-09-26 Wednesday  100.00000  2.3333333          **  2.3185831</span></a>
+<a class="sourceLine" id="cb5-66" data-line-number="66"><span class="co">#&gt; 13 2001-09-27  Thursday   88.88889  0.3535534              0.3396244</span></a>
+<a class="sourceLine" id="cb5-67" data-line-number="67"><span class="co">#&gt; 14 2001-09-28    Friday   66.66667  2.4494897          **  2.4374529</span></a>
+<a class="sourceLine" id="cb5-68" data-line-number="68"><span class="co">#&gt;    gsign_signif csign_stat csign_signif   rank_stat rank_signif mrank_stat</span></a>
+<a class="sourceLine" id="cb5-69" data-line-number="69"><span class="co">#&gt; 1           *** -2.3692653           ** -2.99200390         *** -3.2369822</span></a>
+<a class="sourceLine" id="cb5-70" data-line-number="70"><span class="co">#&gt; 2             * -1.3162585              -1.88451589           * -2.1136279</span></a>
+<a class="sourceLine" id="cb5-71" data-line-number="71"><span class="co">#&gt; 3               -0.2632517              -0.09824490             -0.2522009</span></a>
+<a class="sourceLine" id="cb5-72" data-line-number="72"><span class="co">#&gt; 4               -0.6282463              -0.52374024             -0.4924954</span></a>
+<a class="sourceLine" id="cb5-73" data-line-number="73"><span class="co">#&gt; 5                0.0000000              -0.64431353             -0.6547769</span></a>
+<a class="sourceLine" id="cb5-74" data-line-number="74"><span class="co">#&gt; 6                0.2632517              -0.11610761             -0.2639775</span></a>
+<a class="sourceLine" id="cb5-75" data-line-number="75"><span class="co">#&gt; 7               -0.2632517               0.01488559              0.1371585</span></a>
+<a class="sourceLine" id="cb5-76" data-line-number="76"><span class="co">#&gt; 8           *** -2.3692653           ** -2.96223272         *** -3.2343620</span></a>
+<a class="sourceLine" id="cb5-77" data-line-number="77"><span class="co">#&gt; 9             * -1.3162585              -1.94405826           * -2.1429549</span></a>
+<a class="sourceLine" id="cb5-78" data-line-number="78"><span class="co">#&gt; 10            *  1.3162585               1.77733963           *  1.9849210</span></a>
+<a class="sourceLine" id="cb5-79" data-line-number="79"><span class="co">#&gt; 11            *  1.2564927               2.06104970          **  2.0289176</span></a>
+<a class="sourceLine" id="cb5-80" data-line-number="80"><span class="co">#&gt; 12           **  1.8427619            *  2.03337181          **  2.2844134</span></a>
+<a class="sourceLine" id="cb5-81" data-line-number="81"><span class="co">#&gt; 13               0.0000000               0.51620440              0.4627732</span></a>
+<a class="sourceLine" id="cb5-82" data-line-number="82"><span class="co">#&gt; 14           **  0.9672485               1.85548899           *  1.5735949</span></a>
+<a class="sourceLine" id="cb5-83" data-line-number="83"><span class="co">#&gt;    mrank_signif wlcx_stat wlcx_signif</span></a>
+<a class="sourceLine" id="cb5-84" data-line-number="84"><span class="co">#&gt; 1           ***     0.000         ***</span></a>
+<a class="sourceLine" id="cb5-85" data-line-number="85"><span class="co">#&gt; 2            **     4.000          **</span></a>
+<a class="sourceLine" id="cb5-86" data-line-number="86"><span class="co">#&gt; 3                  21.000            </span></a>
+<a class="sourceLine" id="cb5-87" data-line-number="87"><span class="co">#&gt; 4                  13.500            </span></a>
+<a class="sourceLine" id="cb5-88" data-line-number="88"><span class="co">#&gt; 5                  13.500            </span></a>
+<a class="sourceLine" id="cb5-89" data-line-number="89"><span class="co">#&gt; 6                  17.000            </span></a>
+<a class="sourceLine" id="cb5-90" data-line-number="90"><span class="co">#&gt; 7                  20.000            </span></a>
+<a class="sourceLine" id="cb5-91" data-line-number="91"><span class="co">#&gt; 8           ***     0.000         ***</span></a>
+<a class="sourceLine" id="cb5-92" data-line-number="92"><span class="co">#&gt; 9            **     3.000          **</span></a>
+<a class="sourceLine" id="cb5-93" data-line-number="93"><span class="co">#&gt; 10           **    37.000          **</span></a>
+<a class="sourceLine" id="cb5-94" data-line-number="94"><span class="co">#&gt; 11           **    34.875         ***</span></a>
+<a class="sourceLine" id="cb5-95" data-line-number="95"><span class="co">#&gt; 12           **    42.000         ***</span></a>
+<a class="sourceLine" id="cb5-96" data-line-number="96"><span class="co">#&gt; 13                 24.750            </span></a>
+<a class="sourceLine" id="cb5-97" data-line-number="97"><span class="co">#&gt; 14                 27.000         ***</span></a></code></pre>
+</section>
+<section id="using-magrittr" class="level2">
+<h2>Using <code>magrittr</code></h2>
+<p>One can notice that the result of the previous function is passed to the next function. In order to avoid naming all the intermediate objects or using a function composition, it possible to utilize a power of the pipe operator from <code>magrittr</code>. The above code can be rewritten with:</p>
+<pre class="sourceCode r" id="cb6"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">library</span>(magrittr)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">rates_indx &lt;-<span class="st"> </span><span class="kw">get_prices_from_tickers</span>(<span class="st">&quot;^STOXX50E&quot;</span>,</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">                                      <span class="dt">start =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2000-01-01&quot;</span>),</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">                                      <span class="dt">end =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2002-01-01&quot;</span>),</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">                                      <span class="dt">quote =</span> <span class="st">&quot;Close&quot;</span>,</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">                                      <span class="dt">retclass =</span> <span class="st">&quot;zoo&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="st">    </span><span class="kw">get_rates_from_prices</span>(<span class="dt">quote =</span> <span class="st">&quot;Close&quot;</span>,</a>
+<a class="sourceLine" id="cb6-9" data-line-number="9">                          <span class="dt">multi_day =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb6-10" data-line-number="10">                          <span class="dt">compounding =</span> <span class="st">&quot;continuous&quot;</span>)</a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12">tickers &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ALV.DE&quot;</span>, <span class="st">&quot;CS.PA&quot;</span>, <span class="st">&quot;ELE.PA&quot;</span>, <span class="st">&quot;G.MI&quot;</span>, <span class="st">&quot;HNR1.HA&quot;</span>, <span class="st">&quot;HSX.L&quot;</span>,</a>
+<a class="sourceLine" id="cb6-13" data-line-number="13">             <span class="st">&quot;MUV2.DE&quot;</span>, <span class="st">&quot;RSA.L&quot;</span>, <span class="st">&quot;TOP.CO&quot;</span>)</a>
+<a class="sourceLine" id="cb6-14" data-line-number="14">nine_eleven_param &lt;-<span class="st"> </span><span class="kw">get_prices_from_tickers</span>(tickers,</a>
+<a class="sourceLine" id="cb6-15" data-line-number="15">                                             <span class="dt">start =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2000-01-01&quot;</span>),</a>
+<a class="sourceLine" id="cb6-16" data-line-number="16">                                             <span class="dt">end =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2002-01-01&quot;</span>),</a>
+<a class="sourceLine" id="cb6-17" data-line-number="17">                                             <span class="dt">quote =</span> <span class="st">&quot;Close&quot;</span>,</a>
+<a class="sourceLine" id="cb6-18" data-line-number="18">                                             <span class="dt">retclass =</span> <span class="st">&quot;zoo&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="st">    </span><span class="kw">get_rates_from_prices</span>(<span class="dt">quote =</span> <span class="st">&quot;Close&quot;</span>,</a>
+<a class="sourceLine" id="cb6-20" data-line-number="20">                          <span class="dt">multi_day =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb6-21" data-line-number="21">                          <span class="dt">compounding =</span> <span class="st">&quot;continuous&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-22" data-line-number="22"><span class="st">    </span><span class="kw">apply_market_model</span>(<span class="dt">regressor =</span> rates_indx,</a>
+<a class="sourceLine" id="cb6-23" data-line-number="23">                       <span class="dt">same_regressor_for_all =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb6-24" data-line-number="24">                       <span class="dt">market_model =</span> <span class="st">&quot;sim&quot;</span>,</a>
+<a class="sourceLine" id="cb6-25" data-line-number="25">                       <span class="dt">estimation_method =</span> <span class="st">&quot;ols&quot;</span>,</a>
+<a class="sourceLine" id="cb6-26" data-line-number="26">                       <span class="dt">estimation_start =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2001-03-26&quot;</span>),</a>
+<a class="sourceLine" id="cb6-27" data-line-number="27">                       <span class="dt">estimation_end =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2001-09-10&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-28" data-line-number="28"><span class="st">    </span><span class="kw">parametric_tests</span>(<span class="dt">event_start =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2001-09-11&quot;</span>),</a>
+<a class="sourceLine" id="cb6-29" data-line-number="29">                     <span class="dt">event_end =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2001-09-28&quot;</span>))</a></code></pre>
+</section>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
