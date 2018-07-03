@@ -6,8 +6,8 @@ knitr::opts_chunk$set(
 
 ## ---- message=FALSE, warning=FALSE---------------------------------------
 library(estudy2)
-tickers <- c("ALV.DE", "CS.PA", "ELE.PA", "G.MI", "HNR1.HA", "HSX.L",
-             "MUV2.DE", "RSA.L", "TOP.CO")
+tickers <- c("ALV.DE", "CS.PA", "G.MI", "HNR1.HA", "HSX.L", "MUV2.DE", "RSA.L",
+             "TOP.CO")
 prices <- get_prices_from_tickers(tickers, 
                                   start = as.Date("2000-01-01"),
                                   end = as.Date("2002-01-01"),
@@ -65,8 +65,8 @@ rates_indx <- get_prices_from_tickers("^STOXX50E",
                           multi_day = TRUE,
                           compounding = "continuous")
 
-tickers <- c("ALV.DE", "CS.PA", "ELE.PA", "G.MI", "HNR1.HA", "HSX.L",
-             "MUV2.DE", "RSA.L", "TOP.CO")
+tickers <- c("ALV.DE", "CS.PA", "G.MI", "HNR1.HA", "HSX.L", "MUV2.DE", "RSA.L",
+             "TOP.CO")
 nine_eleven_param <- get_prices_from_tickers(tickers,
                                              start = as.Date("2000-01-01"),
                                              end = as.Date("2002-01-01"),
