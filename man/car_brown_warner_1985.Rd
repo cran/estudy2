@@ -4,7 +4,8 @@
 \alias{car_brown_warner_1985}
 \title{Brown and Warner (1985) CAR test.}
 \usage{
-car_brown_warner_1985(list_of_returns, car_start, car_end, percentage = 90)
+car_brown_warner_1985(list_of_returns, car_start, car_end,
+  percentage = 90)
 }
 \arguments{
 \item{list_of_returns}{a list of objects of S3 class \code{returns}, each
@@ -17,12 +18,19 @@ the CAR period.}
 CAR period.}
 
 \item{percentage}{a lowest allowed percentage of non-missing observation
-for each day to be incorporated into CAR. The default value is 90 percent.}
-}
-\value{
-A list of fist date, last date, average percentage of
-non-missing observation over each day, the value of statistics, the length
-of the time period, and the significance.
+for each day to be incorporated into CAR. The default value is 90 percent.
+\itemize{
+    \item \code{name}: a name of the test, i.e.
+    \code{"car_brown_warner_1985"}
+    \item \code{car_start}: the first date of the CAR period
+    \item \code{car_end}: the last date of the CAR period
+    \item \code{average_percentage}: an average share of non-missing
+          observations over the CAR period
+    \item \code{car_mean}: an average abnormal return over the CAR period
+    \item \code{statistic}: a test's statistic
+    \item \code{number_of_days}: the number of days in the CAR period
+    \item \code{significance}: a significance of the statistic
+}}
 }
 \description{
 A parametric test proposed by Brown and Warner 1995 that examines whether
@@ -31,8 +39,9 @@ or not cumulative abnormal return (CAR) significantly differs from zero.
 \details{
 This function performs a test proposed by Brown and Warner 1985 to
 investigate whether CAR significantly differs from zero. This tests uses the
-variance, specified by Lamb 1995. The advantage of this test is allowance
-for correlated cross-sectional returns. The test statistic is close enough to
+variance, specified by Brown and Warner 1985. The advantage of this test is
+allowance for correlated cross-sectional returns. However, the test does not
+use autocorrelation adjustment. The test statistic is close enough to
 statistic, produced by \code{\link{car_lamb}}. The critical values are
 standard normal. The significance levels of \eqn{\alpha} are 0.1, 0.05, and
 0.01 (marked respectively by *, **, and ***).

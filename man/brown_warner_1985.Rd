@@ -17,22 +17,31 @@ the event period.}
 event period.}
 }
 \value{
-A data frame of test's statistics and significances.
+A data frame of the following columns:
+\itemize{
+    \item \code{date}: a calendar date
+    \item \code{weekday}: a day of the week
+    \item \code{percentage}: a share of non-missing observations for a given
+          day
+    \item \code{mean}: an average abnormal return
+    \item \code{bw_1985_stat}: a Brown and Warner (1985) test statistic
+    \item \code{bw_1985_signif}: a significance of the statistic
+}
 }
 \description{
 An event study parametric test described in Brown and Warner 1985.
 }
 \details{
 Performs a parametric test for event study, which is described in Brown and
-Warner 1985, which is a traditional event study approach. Assumes
-cross-sectional independence and is non-robust to an event-induced variance.
-The test examines the hypothesis whether the theoretical cross-sectional
-expected value for a given day is equal to zero. The standard deviation in
-statistics is estimated as the cross-sectional standard deviation of
-companies' means, estimated on the estimation period. It calculates
-statistics even if event window and estimation period are overlapped
-(intersect). The critical values are Student's t-distributed
-(no approximation in limit). The significance levels of \eqn{\alpha} are 0.1,
+Warner 1985, which is a traditional event study approach. This test does not
+require cross-sectional independence but is non-robust to an event-induced
+variance. The test examines the hypothesis whether the theoretical
+cross-sectional expected value for a given day is equal to zero. The standard
+ deviation in statistics is estimated as the cross-sectional standard
+deviation of companies' means, estimated on the estimation period. It
+calculates statistics even if event window and estimation period are
+overlapped (intersect). The critical values are Student's t-distributed (no
+approximation in limit). The significance levels of \eqn{\alpha} are 0.1,
  0.05, and 0.01 (marked respectively by *, **, and ***).
 }
 \examples{

@@ -19,7 +19,15 @@
 #' @param tests a list of tests' functions among \code{brown_warner_1980},
 #' \code{brown_warner_1985}, \code{t_test}, \code{patell}, \code{boehmer}, and
 #' \code{lamb}.
-#' @return A data frame containing all statistics and significances of tests.
+#' @return A data frame of the following columns:
+#' \itemize{
+#'     \item \code{date}: a calendar date
+#'     \item \code{weekday}: a day of the week
+#'     \item \code{percentage}: a share of non-missing observations for a given
+#'           day
+#'     \item \code{mean}: an average abnormal return
+#'     \item Various tests' statistics and significance
+#' }
 #'
 #' @references \itemize{
 #' \item Brown S.J., Warner J.B. \emph{Measuring security price performance}.
@@ -131,7 +139,16 @@ parametric_tests <- function(list_of_returns, event_start, event_end,
 #' the event period.
 #' @param event_end an object of \code{Date} class giving the last date of the
 #' event period.
-#' @return A data frame of test's statistics and significances.
+#' @return A data frame of the following columns:
+#' \itemize{
+#'     \item \code{date}: a calendar date
+#'     \item \code{weekday}: a day of the week
+#'     \item \code{percentage}: a share of non-missing observations for a given
+#'           day
+#'     \item \code{mean}: an average abnormal return
+#'     \item \code{bw_1980_stat}: a Brown and Warner (1980) test statistic
+#'     \item \code{bw_1980_signif}: a significance of the statistic
+#' }
 #'
 #' @references Brown S.J., Warner J.B. \emph{Measuring security price
 #' performance}. Journal of Financial Economics, 8:205-258, 1980.
@@ -261,15 +278,15 @@ brown_warner_1980 <- function(list_of_returns, event_start, event_end) {
 #' An event study parametric test described in Brown and Warner 1985.
 #'
 #' Performs a parametric test for event study, which is described in Brown and
-#' Warner 1985, which is a traditional event study approach. Assumes
-#' cross-sectional independence and is non-robust to an event-induced variance.
-#' The test examines the hypothesis whether the theoretical cross-sectional
-#' expected value for a given day is equal to zero. The standard deviation in
-#' statistics is estimated as the cross-sectional standard deviation of
-#' companies' means, estimated on the estimation period. It calculates
-#' statistics even if event window and estimation period are overlapped
-#' (intersect). The critical values are Student's t-distributed
-#' (no approximation in limit). The significance levels of \eqn{\alpha} are 0.1,
+#' Warner 1985, which is a traditional event study approach. This test does not
+#' require cross-sectional independence but is non-robust to an event-induced
+#' variance. The test examines the hypothesis whether the theoretical
+#' cross-sectional expected value for a given day is equal to zero. The standard
+#'  deviation in statistics is estimated as the cross-sectional standard
+#' deviation of companies' means, estimated on the estimation period. It
+#' calculates statistics even if event window and estimation period are
+#' overlapped (intersect). The critical values are Student's t-distributed (no
+#' approximation in limit). The significance levels of \eqn{\alpha} are 0.1,
 #'  0.05, and 0.01 (marked respectively by *, **, and ***).
 #'
 #' @param list_of_returns a list of objects of S3 class \code{returns}, each
@@ -278,7 +295,16 @@ brown_warner_1980 <- function(list_of_returns, event_start, event_end) {
 #' the event period.
 #' @param event_end an object of \code{Date} class giving the last date of the
 #' event period.
-#' @return A data frame of test's statistics and significances.
+#' @return A data frame of the following columns:
+#' \itemize{
+#'     \item \code{date}: a calendar date
+#'     \item \code{weekday}: a day of the week
+#'     \item \code{percentage}: a share of non-missing observations for a given
+#'           day
+#'     \item \code{mean}: an average abnormal return
+#'     \item \code{bw_1985_stat}: a Brown and Warner (1985) test statistic
+#'     \item \code{bw_1985_signif}: a significance of the statistic
+#' }
 #'
 #' @references Brown S.J., Warner J.B. \emph{Using Daily Stock Returns, The Case
 #'  of Event Studies}. Journal of Financial Economics, 14:3-31, 1985.
@@ -428,7 +454,16 @@ brown_warner_1985 <- function(list_of_returns, event_start, event_end) {
 #' the event period.
 #' @param event_end an object of \code{Date} class giving the last date of the
 #' event period.
-#' @return A data frame of test's statistics and significances.
+#' @return A data frame of the following columns:
+#' \itemize{
+#'     \item \code{date}: a calendar date
+#'     \item \code{weekday}: a day of the week
+#'     \item \code{percentage}: a share of non-missing observations for a given
+#'           day
+#'     \item \code{mean}: an average abnormal return
+#'     \item \code{t_test_stat}: a t-test statistic
+#'     \item \code{t_test_signif}: a significance of the statistic
+#' }
 #'
 #' @references Boehmer E., Musumeci J., Poulsen A.B. \emph{Event-study
 #' methodology under conditions of event-induced variance}. Journal of Financial
@@ -567,7 +602,16 @@ t_test <- function(list_of_returns, event_start, event_end) {
 #' the event period.
 #' @param event_end an object of \code{Date} class giving the last date of the
 #' event period.
-#' @return A data frame of test's statistics and significances.
+#' @return A data frame of the following columns:
+#' \itemize{
+#'     \item \code{date}: a calendar date
+#'     \item \code{weekday}: a day of the week
+#'     \item \code{percentage}: a share of non-missing observations for a given
+#'           day
+#'     \item \code{mean}: an average abnormal return
+#'     \item \code{pt_stat}: a Patell's test statistic
+#'     \item \code{pt_signif}: a significance of the statistic
+#' }
 #'
 #' @references \itemize{
 #' \item Patell J.M. \emph{Corporate forecasts of earnings per share and stock
@@ -632,7 +676,6 @@ patell <- function(list_of_returns, event_start, event_end) {
 
 
     # zoo objects of abnormal returns
-    # estimation_abnormal <- NULL
     event_abnormal <- NULL
     event_standardized_abnormal <- NULL
     delta <- numeric(length(list_of_returns))
@@ -661,13 +704,6 @@ patell <- function(list_of_returns, event_start, event_end) {
             zoo::index(list_of_returns[[i]]$abnormal) >= event_start &
             zoo::index(list_of_returns[[i]]$abnormal) <= event_end])
 
-#         if(is.null(estimation_abnormal)) {
-#             estimation_abnormal <- company_estimation_abnormal
-#         } else {
-#             estimation_abnormal <- merge(estimation_abnormal,
-#                                          company_estimation_abnormal,
-#                                           all = TRUE)
-#         }
         if(is.null(event_abnormal)) {
             event_abnormal <- company_event_abnormal
         } else {
@@ -711,7 +747,6 @@ patell <- function(list_of_returns, event_start, event_end) {
                              ncol(event_abnormal) * 100,
                          mean = event_means)
 
-    # estimation_abnormal <- as.matrix(estimation_abnormal)
     event_abnormal <- as.matrix(event_abnormal)
     event_standardized_abnormal <- as.matrix(event_standardized_abnormal)
 
@@ -753,7 +788,16 @@ patell <- function(list_of_returns, event_start, event_end) {
 #' the event period.
 #' @param event_end an object of \code{Date} class giving the last date of the
 #' event period.
-#' @return A data frame of test's statistics and significances.
+#' @return A data frame of the following columns:
+#' \itemize{
+#'     \item \code{date}: a calendar date
+#'     \item \code{weekday}: a day of the week
+#'     \item \code{percentage}: a share of non-missing observations for a given
+#'           day
+#'     \item \code{mean}: an average abnormal return
+#'     \item \code{bh_stat}: a Boehmer's test statistic
+#'     \item \code{bh_signif}: a significance of the statistic
+#' }
 #'
 #' @references \itemize{
 #' \item Patell J.M. \emph{Corporate forecasts of earnings per share and stock
@@ -817,7 +861,6 @@ boehmer <- function(list_of_returns, event_start, event_end) {
     }
 
     # zoo objects of abnormal returns
-    # estimation_abnormal <- NULL
     event_abnormal <- NULL
     event_standardized_abnormal <- NULL
     # delta <- numeric(length(list_of_returns))
@@ -846,12 +889,6 @@ boehmer <- function(list_of_returns, event_start, event_end) {
             zoo::index(list_of_returns[[i]]$abnormal) >= event_start &
             zoo::index(list_of_returns[[i]]$abnormal) <= event_end])
 
-#         if(is.null(estimation_abnormal)) {
-#             estimation_abnormal <- company_estimation_abnormal
-#         } else {
-#             estimation_abnormal <- merge(estimation_abnormal,
-#                                          company_estimation_abnormal, all = TRUE)
-#         }
         if(is.null(event_abnormal)) {
             event_abnormal <- company_event_abnormal
         } else {
@@ -894,7 +931,6 @@ boehmer <- function(list_of_returns, event_start, event_end) {
                              ncol(event_abnormal) * 100,
                          mean = event_means)
 
-    # estimation_abnormal <- as.matrix(estimation_abnormal)
     event_abnormal <- as.matrix(event_abnormal)
     event_standardized_abnormal <- as.matrix(event_standardized_abnormal)
 
@@ -936,7 +972,16 @@ boehmer <- function(list_of_returns, event_start, event_end) {
 #' the event period.
 #' @param event_end an object of \code{Date} class giving the last date of the
 #' event period.
-#' @return A data frame of test's statistics and significances.
+#' @return A data frame of the following columns:
+#' \itemize{
+#'     \item \code{date}: a calendar date
+#'     \item \code{weekday}: a day of the week
+#'     \item \code{percentage}: a share of non-missing observations for a given
+#'           day
+#'     \item \code{mean}: an average abnormal return
+#'     \item \code{lmb_stat}: a Lamb's test statistic
+#'     \item \code{lmb_signif}: a significance of the statistic
+#' }
 #'
 #' @references Lamb R.P. \emph{An Exposure-Based Analysis of Property-Liability
 #' Insurer Stock Values around Hurricane Andrew}. Journal of Risk and Insurance,
@@ -1049,8 +1094,9 @@ lamb <- function(list_of_returns, event_start, event_end) {
         if(is.null(estimation_abnormal)) {
             estimation_abnormal <- company_estimation_abnormal
         } else {
-        estimation_abnormal <- merge(estimation_abnormal,
-                                     company_estimation_abnormal, all = TRUE)
+            estimation_abnormal <- merge(estimation_abnormal,
+                                         company_estimation_abnormal,
+                                         all = TRUE)
         }
         if(is.null(event_abnormal)) {
             event_abnormal <- company_event_abnormal

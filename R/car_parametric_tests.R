@@ -20,7 +20,18 @@
 #' The default value is \code{TRUE}.
 #' @param tests a list of tests' functions among \code{car_brown_warner_1985}
 #' and \code{car_lamb}.
-#' @return A list of results of given tests.
+#' @return A data frame of the following columns:
+#' \itemize{
+#'     \item \code{name}: a name of the test
+#'     \item \code{car_start}: the first date of the CAR period
+#'     \item \code{car_end}: the last date of the CAR period
+#'     \item \code{average_percentage}: an average share of non-missing
+#'           observations over the CAR period
+#'     \item \code{car_mean}: an average abnormal return over the CAR period
+#'     \item \code{statistic}: a test's statistic
+#'     \item \code{number_of_days}: the number of days in the CAR period
+#'     \item \code{significance}: a significance of the statistic
+#' }
 #'
 #' @references \itemize{
 #' \item Brown S.J., Warner J.B. \emph{Using Daily Stock Returns, The Case of
@@ -86,11 +97,19 @@ car_parametric_tests <- function(list_of_returns, car_start, car_end,
     }
     result <- NULL
     for(i in seq_along(tests)) {
-        tryCatch(
-            result[[i]] <- tests[[i]](list_of_returns, car_start, car_end,
-                                  percentage),
-            error = function(x) warning(paste(x$message,
-                                              "The test will be skip.")))
+        if(is.null(result)) {
+            result <- tests[[i]](list_of_returns, car_start, car_end,
+                                 percentage)
+        } else {
+            tryCatch(
+                result <- rbind(
+                    result,
+                    tests[[i]](list_of_returns, car_start, car_end,
+                               percentage)
+                ),
+                error = function(x) warning(paste(x$message,
+                                                  "The test will be skip.")))
+        }
     }
     return(result)
 }
@@ -116,9 +135,18 @@ car_parametric_tests <- function(list_of_returns, car_start, car_end,
 #' CAR period.
 #' @param percentage a lowest allowed percentage of non-missing observation
 #' for each day to be incorporated into CAR. The default value is 90 percent.
-#' @return A list of fist date, last date, average percentage of
-#' non-missing observation over each day, the value of statistics, the length
-#' of the time period, and the significance.
+#' @return A data frame of the following columns:
+#' \itemize{
+#'     \item \code{name}: a name of the test, i.e. \code{"car_lamb"}
+#'     \item \code{car_start}: the first date of the CAR period
+#'     \item \code{car_end}: the last date of the CAR period
+#'     \item \code{average_percentage}: an average share of non-missing
+#'           observations over the CAR period
+#'     \item \code{car_mean}: an average abnormal return over the CAR period
+#'     \item \code{statistic}: a test's statistic
+#'     \item \code{number_of_days}: the number of days in the CAR period
+#'     \item \code{significance}: a significance of the statistic
+#' }
 #'
 #' @references Lamb R.P. \emph{An Exposure-Based Analysis of Property-Liability
 #' Insurer Stock Values around Hurricane Andrew}. Journal of Risk and Insurance,
@@ -171,6 +199,7 @@ car_lamb <- function(list_of_returns, car_start, car_end, percentage = 90) {
     daily_lamb_statistics_tidy <- daily_lamb_statistics[daily_lamb_statistics[, 3] > percentage &
                                                         daily_lamb_statistics[, 3] > 0, ]
     average_percentage <- mean(daily_lamb_statistics_tidy[, 3])
+    car_mean <- mean(daily_lamb_statistics_tidy[, 4], na.rm = TRUE)
 
     statistic <- sum(daily_lamb_statistics_tidy[, 5], na.rm = TRUE) /
         sqrt(nrow(daily_lamb_statistics_tidy))
@@ -183,11 +212,14 @@ car_lamb <- function(list_of_returns, car_start, car_end, percentage = 90) {
     } else {
         significance <- ""
     }
-    result <- list(car_start = car_start, car_end = car_end,
-                   average_percentage = average_percentage,
-                   statistic = statistic,
-                   number_of_days = nrow(daily_lamb_statistics_tidy),
-                   significance = significance)
+    result <- data.frame(name = "car_lamb",
+                         car_start = car_start,
+                         car_end = car_end,
+                         average_percentage = average_percentage,
+                         car_mean = car_mean,
+                         statistic = statistic,
+                         number_of_days = nrow(daily_lamb_statistics_tidy),
+                         significance = significance)
     return(result)
 }
 
@@ -198,8 +230,9 @@ car_lamb <- function(list_of_returns, car_start, car_end, percentage = 90) {
 #'
 #' This function performs a test proposed by Brown and Warner 1985 to
 #' investigate whether CAR significantly differs from zero. This tests uses the
-#' variance, specified by Lamb 1995. The advantage of this test is allowance
-#' for correlated cross-sectional returns. The test statistic is close enough to
+#' variance, specified by Brown and Warner 1985. The advantage of this test is
+#' allowance for correlated cross-sectional returns. However, the test does not
+#' use autocorrelation adjustment. The test statistic is close enough to
 #' statistic, produced by \code{\link{car_lamb}}. The critical values are
 #' standard normal. The significance levels of \eqn{\alpha} are 0.1, 0.05, and
 #' 0.01 (marked respectively by *, **, and ***).
@@ -212,9 +245,18 @@ car_lamb <- function(list_of_returns, car_start, car_end, percentage = 90) {
 #' CAR period.
 #' @param percentage a lowest allowed percentage of non-missing observation
 #' for each day to be incorporated into CAR. The default value is 90 percent.
-#' @return A list of fist date, last date, average percentage of
-#' non-missing observation over each day, the value of statistics, the length
-#' of the time period, and the significance.
+#' \itemize{
+#'     \item \code{name}: a name of the test, i.e.
+#'     \code{"car_brown_warner_1985"}
+#'     \item \code{car_start}: the first date of the CAR period
+#'     \item \code{car_end}: the last date of the CAR period
+#'     \item \code{average_percentage}: an average share of non-missing
+#'           observations over the CAR period
+#'     \item \code{car_mean}: an average abnormal return over the CAR period
+#'     \item \code{statistic}: a test's statistic
+#'     \item \code{number_of_days}: the number of days in the CAR period
+#'     \item \code{significance}: a significance of the statistic
+#' }
 #'
 #' @references Brown S.J., Warner J.B. \emph{Using Daily Stock Returns, The Case
 #' of Event Studies}. Journal of Financial Economics, 14:3-31, 1985.
@@ -263,13 +305,16 @@ car_lamb <- function(list_of_returns, car_start, car_end, percentage = 90) {
 #' @export
 car_brown_warner_1985 <- function(list_of_returns, car_start, car_end,
                                   percentage = 90) {
-    daily_lamb_statistics <- brown_warner_1985(list_of_returns, car_start, car_end)
-    daily_lamb_statistics_tidy <- daily_lamb_statistics[daily_lamb_statistics[, 3] > percentage &
-                                                            daily_lamb_statistics[, 3] > 0, ]
-    average_percentage <- mean(daily_lamb_statistics_tidy[, 3])
+    daily_brown_warner_1985_statistics <- brown_warner_1985(list_of_returns, car_start, car_end)
+    daily_brown_warner_1985_statistics_tidy <-
+        daily_brown_warner_1985_statistics[
+            daily_brown_warner_1985_statistics[, 3] > percentage &
+                daily_brown_warner_1985_statistics[, 3] > 0, ]
+    average_percentage <- mean(daily_brown_warner_1985_statistics_tidy[, 3])
+    car_mean <- mean(daily_brown_warner_1985_statistics_tidy[, 4], na.rm = TRUE)
 
-    statistic <- sum(daily_lamb_statistics_tidy[, 5], na.rm = TRUE) /
-        sqrt(nrow(daily_lamb_statistics_tidy))
+    statistic <- sum(daily_brown_warner_1985_statistics_tidy[, 5], na.rm = TRUE) /
+        sqrt(nrow(daily_brown_warner_1985_statistics_tidy))
     if(abs(statistic) >= const_q3) {
         significance <- "***"
     } else if(abs(statistic) >= const_q2) {
@@ -279,10 +324,13 @@ car_brown_warner_1985 <- function(list_of_returns, car_start, car_end,
     } else {
         significance <- ""
     }
-    result <- list(car_start = car_start, car_end = car_end,
-                   average_percentage = average_percentage,
-                   statistic = statistic,
-                   number_of_days = nrow(daily_lamb_statistics_tidy),
-                   significance = significance)
+    result <- data.frame(name = "car_brown_warner_1985",
+                         car_start = car_start,
+                         car_end = car_end,
+                         average_percentage = average_percentage,
+                         car_mean = car_mean,
+                         statistic = statistic,
+                         number_of_days = nrow(daily_brown_warner_1985_statistics_tidy),
+                         significance = significance)
     return(result)
 }
