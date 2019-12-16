@@ -407,6 +407,7 @@ apply_market_model.zoo <- function(rates, regressors, same_regressor_for_all =
 #' @seealso \code{\link{apply_market_model}}
 #'
 #' @examples
+#' library("zoo")
 #' ## 1. Mean-adjusted-returns model
 #' \dontrun{
 #' library("magrittr")
@@ -424,7 +425,7 @@ apply_market_model.zoo <- function(rates, regressors, same_regressor_for_all =
 #' }
 #' ## The result of the code above is equivalent to:
 #' data(rates)
-#' single_return <- returns(rates[, "ALV.DE", drop = FALSE],
+#' single_return <- returns(rates[, "ALV.DE"],
 #'                          market_model = "mean_adj",
 #'                          estimation_start = as.Date("2001-03-26"),
 #'                          estimation_end = as.Date("2001-09-10"))

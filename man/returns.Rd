@@ -71,6 +71,7 @@ market model For this model only Ordinary Least Squares
 in Brown and Warner (1985).
 }
 \examples{
+library("zoo")
 ## 1. Mean-adjusted-returns model
 \dontrun{
 library("magrittr")
@@ -88,7 +89,7 @@ single_return <- get_prices_from_tickers("ALV.DE",
 }
 ## The result of the code above is equivalent to:
 data(rates)
-single_return <- returns(rates[, "ALV.DE", drop = FALSE],
+single_return <- returns(rates[, "ALV.DE"],
                          market_model = "mean_adj",
                          estimation_start = as.Date("2001-03-26"),
                          estimation_end = as.Date("2001-09-10"))

@@ -1,8 +1,8 @@
-1799332b261abc875b0a518c07bb6e59 *DESCRIPTION
+0acc820ea50506f8f8402306027eebd4 *DESCRIPTION
 32293a8d3ecf2ce5202c0dcb40dc0fa0 *NAMESPACE
-00a6c26812effe8e4e4d2bd720585d4c *NEWS.md
+ca5302e9d21dd49955032b5cf6b9cf06 *NEWS.md
 6c0e08bfcfeee612947f349227b6b135 *R/RcppExports.R
-cee7aa901ddb37ccbb507215dd848f33 *R/apply_market_model.R
+3bc082784242045e78950048197de51e *R/apply_market_model.R
 a8494371610a2a17174f91fe481242c8 *R/car_nonparametric_tests.R
 7f984fd1261f68a2622930fb93d30352 *R/car_parametric_tests.R
 83daf338c81a0efb9cfa9f82207fd1cd *R/constants.R
@@ -12,8 +12,8 @@ a8494371610a2a17174f91fe481242c8 *R/car_nonparametric_tests.R
 09db573a762a533cafd6eab984e952db *R/get_rates_from_prices.R
 2fbd00e5157b18c28012582dae65c84b *R/nonparametric_tests.R
 49f2ff0dfc2d6091f13883941c9507f9 *R/parametric_tests.R
-1e1c117f228112e2c0c385395f815d4a *README.md
-49567072f0057c8162c3b0de9c5482b6 *build/vignette.rds
+f6febd235c9bb691d7f1335c55b02b84 *README.md
+4996609fe125d2a59ba10cf11a60d605 *build/vignette.rds
 6c3e135703d65452c5097e7b73aedf10 *data/prices.rda
 3da21bb3bb49f13a0b4a3bcf3c4ba3d6 *data/prices_indx.rda
 3460d7f0f0a2650be5b4fd06802d5c1c *data/rates.rda
@@ -21,7 +21,7 @@ a8494371610a2a17174f91fe481242c8 *R/car_nonparametric_tests.R
 b80e415bca32aa45769388c32d4edaf9 *data/securities_returns.rda
 d273fb38f83ffdb873b523eaa17dd00b *inst/doc/estudy2-intro.R
 1cfd59a6a2b67178e6de295500875ec3 *inst/doc/estudy2-intro.Rmd
-5805649af991d5b3c1dacae08f8d269e *inst/doc/estudy2-intro.html
+859a78fe37fd63db62a4960fdea21ca9 *inst/doc/estudy2-intro.html
 4d0d819cfe51a4faf61ca2029315ef7c *man/apply_market_model.Rd
 4c7ab2add8b368fdfe1d79675313bf32 *man/boehmer.Rd
 618f2196da2df75c2cc857eff5e3df53 *man/brown_warner_1980.Rd
@@ -45,7 +45,7 @@ d8b822a004af128a73500a15181cbdae *man/parametric_tests.Rd
 31adbfd26de2b211b24ec904b2df6e4b *man/rank_test.Rd
 21bcfaa8ef30163005c1bc4553e8c242 *man/rates.Rd
 653421e4fc61af6407644f8c550f894c *man/rates_indx.Rd
-dc5d51a1f327f688975a1b95f858ed89 *man/returns.Rd
+54b4759f9211410bc5e6d1cf1bbe7963 *man/returns.Rd
 8311988cf4da4095edbd2902c93ce52f *man/securities_returns.Rd
 853285144fc803b1d75f9c6631e8be77 *man/sign_test.Rd
 b225cdb85a77f9bf3414253f45dd674c *man/t_test.Rd
