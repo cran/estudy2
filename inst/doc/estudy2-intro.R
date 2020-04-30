@@ -1,10 +1,10 @@
-## ----setup, include = FALSE----------------------------------------------
+## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 
-## ---- message=FALSE, warning=FALSE---------------------------------------
+## ---- message=FALSE, warning=FALSE--------------------------------------------
 library(estudy2)
 tickers <- c("ALV.DE", "CS.PA", "G.MI", "HNR1.HA", "HSX.L", "MUV2.DE", "RSA.L",
              "TOP.CO")
@@ -14,14 +14,14 @@ prices <- get_prices_from_tickers(tickers,
                                   quote = "Close",
                                   retclass = "zoo")
 
-## ---- message=FALSE, warning=FALSE---------------------------------------
-prices_indx <- get_prices_from_tickers("^STOXX50E",
+## ---- message=FALSE, warning=FALSE--------------------------------------------
+prices_indx <- get_prices_from_tickers("^N100",
                                        start = as.Date("2000-01-01"),
                                        end = as.Date("2002-01-01"),
                                        quote = "Close",
                                        retclass = "zoo")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 rates <- get_rates_from_prices(prices,
                                quote = "Close",
                                multi_day = TRUE,
@@ -32,7 +32,7 @@ rates_indx <- get_rates_from_prices(prices_indx,
                                     multi_day = TRUE,
                                     compounding = "continuous")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 securities_returns <- apply_market_model(
     rates = rates,
     regressor = rates_indx,
@@ -43,7 +43,7 @@ securities_returns <- apply_market_model(
     estimation_end = as.Date("2001-09-10")
 )
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 parametric_tests(list_of_returns = securities_returns,
                  event_start = as.Date("2001-09-11"),
                  event_end = as.Date("2001-09-28"))
@@ -53,10 +53,10 @@ nonparametric_tests(list_of_returns = securities_returns,
                     event_end = as.Date("2001-09-28"))
 
 
-## ---- message=FALSE, warning=FALSE---------------------------------------
+## ---- message=FALSE, warning=FALSE--------------------------------------------
 library(magrittr)
 
-rates_indx <- get_prices_from_tickers("^STOXX50E",
+rates_indx <- get_prices_from_tickers("^N100",
                                       start = as.Date("2000-01-01"),
                                       end = as.Date("2002-01-01"),
                                       quote = "Close",

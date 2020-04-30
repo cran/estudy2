@@ -8,11 +8,11 @@
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <meta name="author" content="Iegor Rudnytskyi" />
 
-<meta name="date" content="2019-12-16" />
+<meta name="date" content="2020-04-30" />
 
 <title>Introduction to estudy2</title>
 
@@ -117,9 +117,6 @@ padding-right: 2em;
 font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 font-size: 14px;
 line-height: 1.35;
-}
-#header {
-text-align: center;
 }
 #TOC {
 clear: both;
@@ -288,7 +285,8 @@ code > span.st { color: #d14; }
 code > span.co { color: #888888; font-style: italic; } 
 code > span.ot { color: #007020; } 
 code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
 
 
@@ -303,7 +301,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">Introduction to estudy2</h1>
 <h4 class="author">Iegor Rudnytskyi</h4>
-<h4 class="date">2019-12-16</h4>
+<h4 class="date">2020-04-30</h4>
 
 
 
@@ -341,7 +339,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb1-7" data-line-number="7">                                  <span class="dt">quote =</span> <span class="st">&quot;Close&quot;</span>,</a>
 <a class="sourceLine" id="cb1-8" data-line-number="8">                                  <span class="dt">retclass =</span> <span class="st">&quot;zoo&quot;</span>)</a></code></pre></div>
 <p>For using a single-index market model we also need to download prices of an index (proxy):</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">prices_indx &lt;-<span class="st"> </span><span class="kw">get_prices_from_tickers</span>(<span class="st">&quot;^STOXX50E&quot;</span>,</a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">prices_indx &lt;-<span class="st"> </span><span class="kw">get_prices_from_tickers</span>(<span class="st">&quot;^N100&quot;</span>,</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">                                       <span class="dt">start =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2000-01-01&quot;</span>),</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">                                       <span class="dt">end =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2002-01-01&quot;</span>),</a>
 <a class="sourceLine" id="cb2-4" data-line-number="4">                                       <span class="dt">quote =</span> <span class="st">&quot;Close&quot;</span>,</a>
@@ -379,107 +377,107 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">parametric_tests</span>(<span class="dt">list_of_returns =</span> securities_returns,</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">                 <span class="dt">event_start =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2001-09-11&quot;</span>),</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">                 <span class="dt">event_end =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2001-09-28&quot;</span>))</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;          date   weekday percentage         mean bw_1980_stat</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; 1  2001-09-11   Tuesday        100 -0.070310766  -10.4498488</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; 2  2001-09-12 Wednesday        100 -0.050417895   -7.4932960</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; 3  2001-09-13  Thursday        100  0.004065211    0.6041869</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; 4  2001-09-14    Friday        100 -0.026200595   -3.8940303</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; 5  2001-09-17    Monday        100 -0.004221486   -0.6274130</span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; 6  2001-09-18   Tuesday        100 -0.016655690   -2.4754309</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; 7  2001-09-19 Wednesday        100 -0.002715794   -0.4036314</span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt; 8  2001-09-20  Thursday        100 -0.099439820  -14.7791177</span></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; 9  2001-09-21    Friday        100 -0.041236146   -6.1286701</span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; 10 2001-09-24    Monday        100  0.034900198    5.1869979</span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; 11 2001-09-25   Tuesday        100  0.050934143    7.5700227</span></a>
-<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; 12 2001-09-26 Wednesday        100  0.017198700    2.5561351</span></a>
-<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt; 13 2001-09-27  Thursday        100  0.008473701    1.2593931</span></a>
-<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt; 14 2001-09-28    Friday         75  0.010468462    1.5558620</span></a>
-<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">#&gt;    bw_1980_signif bw_1985_stat bw_1985_signif t_test_stat t_test_signif</span></a>
-<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co">#&gt; 1             ***   -9.1377725            ***  -4.6136474           ***</span></a>
-<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="co">#&gt; 2             ***   -6.5524426            ***  -2.0065633             *</span></a>
-<a class="sourceLine" id="cb5-22" data-line-number="22"><span class="co">#&gt; 3                    0.5283255                  0.2155208              </span></a>
-<a class="sourceLine" id="cb5-23" data-line-number="23"><span class="co">#&gt; 4             ***   -3.4050984            ***  -1.0675013              </span></a>
-<a class="sourceLine" id="cb5-24" data-line-number="24"><span class="co">#&gt; 5                   -0.5486354                 -0.1921879              </span></a>
-<a class="sourceLine" id="cb5-25" data-line-number="25"><span class="co">#&gt; 6              **   -2.1646174             **  -0.7000980              </span></a>
-<a class="sourceLine" id="cb5-26" data-line-number="26"><span class="co">#&gt; 7                   -0.3529517                 -0.1467507              </span></a>
-<a class="sourceLine" id="cb5-27" data-line-number="27"><span class="co">#&gt; 8             ***  -12.9234612            ***  -2.7708264            **</span></a>
-<a class="sourceLine" id="cb5-28" data-line-number="28"><span class="co">#&gt; 9             ***   -5.3591582            ***  -2.9777583            **</span></a>
-<a class="sourceLine" id="cb5-29" data-line-number="29"><span class="co">#&gt; 10            ***    4.5357217            ***   1.9554700             *</span></a>
-<a class="sourceLine" id="cb5-30" data-line-number="30"><span class="co">#&gt; 11            ***    6.6195355            ***   2.7935029            **</span></a>
-<a class="sourceLine" id="cb5-31" data-line-number="31"><span class="co">#&gt; 12             **    2.2351884             **   2.7453924            **</span></a>
-<a class="sourceLine" id="cb5-32" data-line-number="32"><span class="co">#&gt; 13                   1.1012645                  0.6376467              </span></a>
-<a class="sourceLine" id="cb5-33" data-line-number="33"><span class="co">#&gt; 14                   1.3605090                  1.9664812              </span></a>
-<a class="sourceLine" id="cb5-34" data-line-number="34"><span class="co">#&gt;        pt_stat pt_signif    bh_stat bh_signif    lmb_stat lmb_signif</span></a>
-<a class="sourceLine" id="cb5-35" data-line-number="35"><span class="co">#&gt; 1  -10.6053649       *** -3.7752115       ***  -8.3398273        ***</span></a>
-<a class="sourceLine" id="cb5-36" data-line-number="36"><span class="co">#&gt; 2   -6.1876289       *** -1.8307089            -6.4967073        ***</span></a>
-<a class="sourceLine" id="cb5-37" data-line-number="37"><span class="co">#&gt; 3    1.2386443            0.4542658             0.5245677           </span></a>
-<a class="sourceLine" id="cb5-38" data-line-number="38"><span class="co">#&gt; 4   -4.2965526       *** -1.1124795            -3.1282615        ***</span></a>
-<a class="sourceLine" id="cb5-39" data-line-number="39"><span class="co">#&gt; 5    0.6088912            0.1848071            -0.5298223           </span></a>
-<a class="sourceLine" id="cb5-40" data-line-number="40"><span class="co">#&gt; 6   -2.6380721       *** -0.6385645            -2.1548547         **</span></a>
-<a class="sourceLine" id="cb5-41" data-line-number="41"><span class="co">#&gt; 7    0.2920221            0.1140339            -0.3463359           </span></a>
-<a class="sourceLine" id="cb5-42" data-line-number="42"><span class="co">#&gt; 8  -13.9458986       *** -3.1250165        ** -12.3423564        ***</span></a>
-<a class="sourceLine" id="cb5-43" data-line-number="43"><span class="co">#&gt; 9   -5.8695546       *** -2.7229220        **  -5.2337855        ***</span></a>
-<a class="sourceLine" id="cb5-44" data-line-number="44"><span class="co">#&gt; 10   4.6916806       ***  1.7003251             4.1355087        ***</span></a>
-<a class="sourceLine" id="cb5-45" data-line-number="45"><span class="co">#&gt; 11   7.4886553       ***  2.9610826        **   6.5758189        ***</span></a>
-<a class="sourceLine" id="cb5-46" data-line-number="46"><span class="co">#&gt; 12   2.5761525       ***  3.1156845        **   2.2049847         **</span></a>
-<a class="sourceLine" id="cb5-47" data-line-number="47"><span class="co">#&gt; 13   1.7777984         *  0.8649207             1.0911784           </span></a>
-<a class="sourceLine" id="cb5-48" data-line-number="48"><span class="co">#&gt; 14   1.5130808            2.0464470         *   1.3255244</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;          date   weekday percentage          mean bw_1980_stat bw_1980_signif</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; 1  2001-09-11   Tuesday        100 -0.1034808908  -15.4849746            ***</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; 2  2001-09-12 Wednesday        100 -0.0345902954   -5.1761233            ***</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; 3  2001-09-13  Thursday          0            NA           NA               </span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; 4  2001-09-14    Friday        100 -0.0340256202   -5.0916248            ***</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; 5  2001-09-17    Monday        100  0.0180458400    2.7003959            ***</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; 6  2001-09-18   Tuesday        100 -0.0007609145   -0.1138639               </span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; 7  2001-09-19 Wednesday        100 -0.0048350600   -0.7235228               </span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt; 8  2001-09-20  Thursday        100 -0.0974285486  -14.5792966            ***</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; 9  2001-09-21    Friday        100 -0.0412253278   -6.1689955            ***</span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; 10 2001-09-24    Monday        100  0.0369475589    5.5288663            ***</span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; 11 2001-09-25   Tuesday        100  0.0467385257    6.9939955            ***</span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; 12 2001-09-26 Wednesday        100  0.0188989270    2.8280526            ***</span></a>
+<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt; 13 2001-09-27  Thursday        100  0.0112991782    1.6908193              *</span></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt; 14 2001-09-28    Friday         75  0.0124532411    1.8635143              *</span></a>
+<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">#&gt;    bw_1985_stat bw_1985_signif t_test_stat t_test_signif      pt_stat pt_signif</span></a>
+<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co">#&gt; 1   -14.2627399            *** -5.42771049           *** -16.87675545       ***</span></a>
+<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="co">#&gt; 2    -4.7675700            *** -1.28556739                -3.70431859       ***</span></a>
+<a class="sourceLine" id="cb5-22" data-line-number="22"><span class="co">#&gt; 3            NA                         NA                         NA          </span></a>
+<a class="sourceLine" id="cb5-23" data-line-number="23"><span class="co">#&gt; 4    -4.6897409            *** -1.40722618                -5.56853580       ***</span></a>
+<a class="sourceLine" id="cb5-24" data-line-number="24"><span class="co">#&gt; 5     2.4872527             **  0.76664601                 4.17125705       ***</span></a>
+<a class="sourceLine" id="cb5-25" data-line-number="25"><span class="co">#&gt; 6    -0.1048766                -0.03058958                -0.13316188          </span></a>
+<a class="sourceLine" id="cb5-26" data-line-number="26"><span class="co">#&gt; 7    -0.6664149                -0.26399890                -0.07188815          </span></a>
+<a class="sourceLine" id="cb5-27" data-line-number="27"><span class="co">#&gt; 8   -13.4285474            *** -2.70161687            ** -13.51138444       ***</span></a>
+<a class="sourceLine" id="cb5-28" data-line-number="28"><span class="co">#&gt; 9    -5.6820745            *** -3.00443389            **  -5.97096266       ***</span></a>
+<a class="sourceLine" id="cb5-29" data-line-number="29"><span class="co">#&gt; 10    5.0924709            ***  2.10171156             *   5.08237801       ***</span></a>
+<a class="sourceLine" id="cb5-30" data-line-number="30"><span class="co">#&gt; 11    6.4419569            ***  2.48824735            **   6.76015529       ***</span></a>
+<a class="sourceLine" id="cb5-31" data-line-number="31"><span class="co">#&gt; 12    2.6048334             **  3.05631241            **   2.88119980       ***</span></a>
+<a class="sourceLine" id="cb5-32" data-line-number="32"><span class="co">#&gt; 13    1.5573623                 0.83948590                 2.22161248        **</span></a>
+<a class="sourceLine" id="cb5-33" data-line-number="33"><span class="co">#&gt; 14    1.7164265              *  2.19578010             *   1.87196090         *</span></a>
+<a class="sourceLine" id="cb5-34" data-line-number="34"><span class="co">#&gt;        bh_stat bh_signif    lmb_stat lmb_signif</span></a>
+<a class="sourceLine" id="cb5-35" data-line-number="35"><span class="co">#&gt; 1  -4.45409291       *** -14.1976044        ***</span></a>
+<a class="sourceLine" id="cb5-36" data-line-number="36"><span class="co">#&gt; 2  -0.98762098            -4.7209590        ***</span></a>
+<a class="sourceLine" id="cb5-37" data-line-number="37"><span class="co">#&gt; 3           NA                    NA           </span></a>
+<a class="sourceLine" id="cb5-38" data-line-number="38"><span class="co">#&gt; 4  -1.42803620            -4.4303298        ***</span></a>
+<a class="sourceLine" id="cb5-39" data-line-number="39"><span class="co">#&gt; 5   1.14070051             2.4758486         **</span></a>
+<a class="sourceLine" id="cb5-40" data-line-number="40"><span class="co">#&gt; 6  -0.03168897            -0.1018215           </span></a>
+<a class="sourceLine" id="cb5-41" data-line-number="41"><span class="co">#&gt; 7  -0.02820835            -0.6562277           </span></a>
+<a class="sourceLine" id="cb5-42" data-line-number="42"><span class="co">#&gt; 8  -3.03467540        ** -12.6889753        ***</span></a>
+<a class="sourceLine" id="cb5-43" data-line-number="43"><span class="co">#&gt; 9  -2.75369055        **  -5.5420783        ***</span></a>
+<a class="sourceLine" id="cb5-44" data-line-number="44"><span class="co">#&gt; 10  1.91033095         *   4.6442996        ***</span></a>
+<a class="sourceLine" id="cb5-45" data-line-number="45"><span class="co">#&gt; 11  2.61279384        **   6.3597086        ***</span></a>
+<a class="sourceLine" id="cb5-46" data-line-number="46"><span class="co">#&gt; 12  3.49544565        **   2.5732042         **</span></a>
+<a class="sourceLine" id="cb5-47" data-line-number="47"><span class="co">#&gt; 13  1.06757580             1.5466368           </span></a>
+<a class="sourceLine" id="cb5-48" data-line-number="48"><span class="co">#&gt; 14  2.33716388         *   1.6751766          *</span></a>
 <a class="sourceLine" id="cb5-49" data-line-number="49"></a>
 <a class="sourceLine" id="cb5-50" data-line-number="50"><span class="kw">nonparametric_tests</span>(<span class="dt">list_of_returns =</span> securities_returns,</a>
 <a class="sourceLine" id="cb5-51" data-line-number="51">                    <span class="dt">event_start =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2001-09-11&quot;</span>),</a>
 <a class="sourceLine" id="cb5-52" data-line-number="52">                    <span class="dt">event_end =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2001-09-28&quot;</span>))</a>
-<a class="sourceLine" id="cb5-53" data-line-number="53"><span class="co">#&gt;          date   weekday percentage  sign_stat sign_signif  gsign_stat</span></a>
-<a class="sourceLine" id="cb5-54" data-line-number="54"><span class="co">#&gt; 1  2001-09-11   Tuesday        100 -2.8284271         *** -2.78643330</span></a>
-<a class="sourceLine" id="cb5-55" data-line-number="55"><span class="co">#&gt; 2  2001-09-12 Wednesday        100 -1.4142136             -1.37206152</span></a>
-<a class="sourceLine" id="cb5-56" data-line-number="56"><span class="co">#&gt; 3  2001-09-13  Thursday        100  0.0000000              0.04231027</span></a>
-<a class="sourceLine" id="cb5-57" data-line-number="57"><span class="co">#&gt; 4  2001-09-14    Friday        100 -0.7071068             -0.66487562</span></a>
-<a class="sourceLine" id="cb5-58" data-line-number="58"><span class="co">#&gt; 5  2001-09-17    Monday        100  0.0000000              0.04231027</span></a>
-<a class="sourceLine" id="cb5-59" data-line-number="59"><span class="co">#&gt; 6  2001-09-18   Tuesday        100  0.0000000              0.04231027</span></a>
-<a class="sourceLine" id="cb5-60" data-line-number="60"><span class="co">#&gt; 7  2001-09-19 Wednesday        100 -0.7071068             -0.66487562</span></a>
-<a class="sourceLine" id="cb5-61" data-line-number="61"><span class="co">#&gt; 8  2001-09-20  Thursday        100 -2.8284271         *** -2.78643330</span></a>
-<a class="sourceLine" id="cb5-62" data-line-number="62"><span class="co">#&gt; 9  2001-09-21    Friday        100 -1.4142136             -1.37206152</span></a>
-<a class="sourceLine" id="cb5-63" data-line-number="63"><span class="co">#&gt; 10 2001-09-24    Monday        100  2.1213203          **  2.16386794</span></a>
-<a class="sourceLine" id="cb5-64" data-line-number="64"><span class="co">#&gt; 11 2001-09-25   Tuesday        100  1.4142136              1.45668205</span></a>
-<a class="sourceLine" id="cb5-65" data-line-number="65"><span class="co">#&gt; 12 2001-09-26 Wednesday        100  2.1213203          **  2.16386794</span></a>
-<a class="sourceLine" id="cb5-66" data-line-number="66"><span class="co">#&gt; 13 2001-09-27  Thursday        100  0.0000000              0.04231027</span></a>
-<a class="sourceLine" id="cb5-67" data-line-number="67"><span class="co">#&gt; 14 2001-09-28    Friday         75  1.9051587           *  1.94201360</span></a>
-<a class="sourceLine" id="cb5-68" data-line-number="68"><span class="co">#&gt;    gsign_signif csign_stat csign_signif    rank_stat rank_signif</span></a>
-<a class="sourceLine" id="cb5-69" data-line-number="69"><span class="co">#&gt; 1           *** -2.3783843           ** -3.216659912         ***</span></a>
-<a class="sourceLine" id="cb5-70" data-line-number="70"><span class="co">#&gt; 2               -1.1891922              -1.918951621           *</span></a>
-<a class="sourceLine" id="cb5-71" data-line-number="71"><span class="co">#&gt; 3                0.0000000               0.186372999            </span></a>
-<a class="sourceLine" id="cb5-72" data-line-number="72"><span class="co">#&gt; 4               -0.5945961              -0.828324441            </span></a>
-<a class="sourceLine" id="cb5-73" data-line-number="73"><span class="co">#&gt; 5                0.0000000              -0.269205443            </span></a>
-<a class="sourceLine" id="cb5-74" data-line-number="74"><span class="co">#&gt; 6                0.5945961               0.110443259            </span></a>
-<a class="sourceLine" id="cb5-75" data-line-number="75"><span class="co">#&gt; 7               -0.5945961              -0.006902704            </span></a>
-<a class="sourceLine" id="cb5-76" data-line-number="76"><span class="co">#&gt; 8           *** -2.3783843           ** -3.389227504         ***</span></a>
-<a class="sourceLine" id="cb5-77" data-line-number="77"><span class="co">#&gt; 9               -1.1891922              -1.981075954          **</span></a>
-<a class="sourceLine" id="cb5-78" data-line-number="78"><span class="co">#&gt; 10           **  1.7837882            *  2.381432767          **</span></a>
-<a class="sourceLine" id="cb5-79" data-line-number="79"><span class="co">#&gt; 11               1.1891922               2.001784065          **</span></a>
-<a class="sourceLine" id="cb5-80" data-line-number="80"><span class="co">#&gt; 12           **  1.7837882            *  2.036297584          **</span></a>
-<a class="sourceLine" id="cb5-81" data-line-number="81"><span class="co">#&gt; 13               0.0000000               0.676464960            </span></a>
-<a class="sourceLine" id="cb5-82" data-line-number="82"><span class="co">#&gt; 14            *  0.9154405               1.699599038           *</span></a>
-<a class="sourceLine" id="cb5-83" data-line-number="83"><span class="co">#&gt;      mrank_stat mrank_signif wlcx_stat wlcx_signif</span></a>
-<a class="sourceLine" id="cb5-84" data-line-number="84"><span class="co">#&gt; 1  -3.331702615          ***         0         ***</span></a>
-<a class="sourceLine" id="cb5-85" data-line-number="85"><span class="co">#&gt; 2  -2.010229568           **         4          **</span></a>
-<a class="sourceLine" id="cb5-86" data-line-number="86"><span class="co">#&gt; 3   0.151071220                     19            </span></a>
-<a class="sourceLine" id="cb5-87" data-line-number="87"><span class="co">#&gt; 4  -0.842915498                     10            </span></a>
-<a class="sourceLine" id="cb5-88" data-line-number="88"><span class="co">#&gt; 5  -0.288916538                     16            </span></a>
-<a class="sourceLine" id="cb5-89" data-line-number="89"><span class="co">#&gt; 6   0.100731573                     16            </span></a>
-<a class="sourceLine" id="cb5-90" data-line-number="90"><span class="co">#&gt; 7  -0.003276817                     15            </span></a>
-<a class="sourceLine" id="cb5-91" data-line-number="91"><span class="co">#&gt; 8  -3.522070704          ***         0         ***</span></a>
-<a class="sourceLine" id="cb5-92" data-line-number="92"><span class="co">#&gt; 9  -2.030098770           **         3          **</span></a>
-<a class="sourceLine" id="cb5-93" data-line-number="93"><span class="co">#&gt; 10  2.478427843           **        30          **</span></a>
-<a class="sourceLine" id="cb5-94" data-line-number="94"><span class="co">#&gt; 11  2.067838581           **        31          **</span></a>
-<a class="sourceLine" id="cb5-95" data-line-number="95"><span class="co">#&gt; 12  2.137908132           **        33          **</span></a>
-<a class="sourceLine" id="cb5-96" data-line-number="96"><span class="co">#&gt; 13  0.663791033                     22            </span></a>
-<a class="sourceLine" id="cb5-97" data-line-number="97"><span class="co">#&gt; 14  1.511852212                     24         ***</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-53" data-line-number="53"><span class="co">#&gt;          date   weekday percentage  sign_stat sign_signif gsign_stat</span></a>
+<a class="sourceLine" id="cb5-54" data-line-number="54"><span class="co">#&gt; 1  2001-09-11   Tuesday        100 -2.8284271         *** -2.8130468</span></a>
+<a class="sourceLine" id="cb5-55" data-line-number="55"><span class="co">#&gt; 2  2001-09-12 Wednesday        100 -1.4142136             -1.3988122</span></a>
+<a class="sourceLine" id="cb5-56" data-line-number="56"><span class="co">#&gt; 3  2001-09-13  Thursday          0         NA                     NA</span></a>
+<a class="sourceLine" id="cb5-57" data-line-number="57"><span class="co">#&gt; 4  2001-09-14    Friday        100 -1.4142136             -1.3988122</span></a>
+<a class="sourceLine" id="cb5-58" data-line-number="58"><span class="co">#&gt; 5  2001-09-17    Monday        100  0.7071068              0.7225397</span></a>
+<a class="sourceLine" id="cb5-59" data-line-number="59"><span class="co">#&gt; 6  2001-09-18   Tuesday        100  0.7071068              0.7225397</span></a>
+<a class="sourceLine" id="cb5-60" data-line-number="60"><span class="co">#&gt; 7  2001-09-19 Wednesday        100 -0.7071068             -0.6916949</span></a>
+<a class="sourceLine" id="cb5-61" data-line-number="61"><span class="co">#&gt; 8  2001-09-20  Thursday        100 -2.8284271         *** -2.8130468</span></a>
+<a class="sourceLine" id="cb5-62" data-line-number="62"><span class="co">#&gt; 9  2001-09-21    Friday        100 -1.4142136             -1.3988122</span></a>
+<a class="sourceLine" id="cb5-63" data-line-number="63"><span class="co">#&gt; 10 2001-09-24    Monday        100  2.1213203          **  2.1367743</span></a>
+<a class="sourceLine" id="cb5-64" data-line-number="64"><span class="co">#&gt; 11 2001-09-25   Tuesday        100  0.7071068              0.7225397</span></a>
+<a class="sourceLine" id="cb5-65" data-line-number="65"><span class="co">#&gt; 12 2001-09-26 Wednesday        100  2.1213203          **  2.1367743</span></a>
+<a class="sourceLine" id="cb5-66" data-line-number="66"><span class="co">#&gt; 13 2001-09-27  Thursday        100  0.7071068              0.7225397</span></a>
+<a class="sourceLine" id="cb5-67" data-line-number="67"><span class="co">#&gt; 14 2001-09-28    Friday         75  1.9051587           *  1.9185432</span></a>
+<a class="sourceLine" id="cb5-68" data-line-number="68"><span class="co">#&gt;    gsign_signif csign_stat csign_signif  rank_stat rank_signif mrank_stat</span></a>
+<a class="sourceLine" id="cb5-69" data-line-number="69"><span class="co">#&gt; 1           *** -2.3671082           ** -3.4789774         *** -3.5177510</span></a>
+<a class="sourceLine" id="cb5-70" data-line-number="70"><span class="co">#&gt; 2               -1.1835541              -1.3572036             -1.3993558</span></a>
+<a class="sourceLine" id="cb5-71" data-line-number="71"><span class="co">#&gt; 3                       NA                      NA                     NA</span></a>
+<a class="sourceLine" id="cb5-72" data-line-number="72"><span class="co">#&gt; 4               -1.1835541              -1.6059633             -1.6018168</span></a>
+<a class="sourceLine" id="cb5-73" data-line-number="73"><span class="co">#&gt; 5                0.5917770               0.6987221              0.6857532</span></a>
+<a class="sourceLine" id="cb5-74" data-line-number="74"><span class="co">#&gt; 6                0.5917770               0.9767476              0.9658669</span></a>
+<a class="sourceLine" id="cb5-75" data-line-number="75"><span class="co">#&gt; 7               -0.5917770              -0.3621648             -0.3612366</span></a>
+<a class="sourceLine" id="cb5-76" data-line-number="76"><span class="co">#&gt; 8           *** -2.3671082           ** -3.4716610         *** -3.5153340</span></a>
+<a class="sourceLine" id="cb5-77" data-line-number="77"><span class="co">#&gt; 9               -1.1835541              -2.0230016          ** -2.0272555</span></a>
+<a class="sourceLine" id="cb5-78" data-line-number="78"><span class="co">#&gt; 10           **  1.7753311            *  2.4766222          **  2.5139614</span></a>
+<a class="sourceLine" id="cb5-79" data-line-number="79"><span class="co">#&gt; 11               0.5917770               1.7157102           *  1.7309480</span></a>
+<a class="sourceLine" id="cb5-80" data-line-number="80"><span class="co">#&gt; 12           **  1.7753311            *  2.2132296          **  2.2574440</span></a>
+<a class="sourceLine" id="cb5-81" data-line-number="81"><span class="co">#&gt; 13               0.5917770               0.8962665              0.8696880</span></a>
+<a class="sourceLine" id="cb5-82" data-line-number="82"><span class="co">#&gt; 14            *  0.9111004               2.0486092          **  1.7806711</span></a>
+<a class="sourceLine" id="cb5-83" data-line-number="83"><span class="co">#&gt;    mrank_signif wlcx_stat wlcx_signif</span></a>
+<a class="sourceLine" id="cb5-84" data-line-number="84"><span class="co">#&gt; 1           ***         0         ***</span></a>
+<a class="sourceLine" id="cb5-85" data-line-number="85"><span class="co">#&gt; 2                      10            </span></a>
+<a class="sourceLine" id="cb5-86" data-line-number="86"><span class="co">#&gt; 3                      NA            </span></a>
+<a class="sourceLine" id="cb5-87" data-line-number="87"><span class="co">#&gt; 4                       7            </span></a>
+<a class="sourceLine" id="cb5-88" data-line-number="88"><span class="co">#&gt; 5                      24            </span></a>
+<a class="sourceLine" id="cb5-89" data-line-number="89"><span class="co">#&gt; 6                      23            </span></a>
+<a class="sourceLine" id="cb5-90" data-line-number="90"><span class="co">#&gt; 7                      14            </span></a>
+<a class="sourceLine" id="cb5-91" data-line-number="91"><span class="co">#&gt; 8           ***         0         ***</span></a>
+<a class="sourceLine" id="cb5-92" data-line-number="92"><span class="co">#&gt; 9            **         3          **</span></a>
+<a class="sourceLine" id="cb5-93" data-line-number="93"><span class="co">#&gt; 10           **        30          **</span></a>
+<a class="sourceLine" id="cb5-94" data-line-number="94"><span class="co">#&gt; 11            *        30          **</span></a>
+<a class="sourceLine" id="cb5-95" data-line-number="95"><span class="co">#&gt; 12           **        33          **</span></a>
+<a class="sourceLine" id="cb5-96" data-line-number="96"><span class="co">#&gt; 13                     23            </span></a>
+<a class="sourceLine" id="cb5-97" data-line-number="97"><span class="co">#&gt; 14            *        24         ***</span></a></code></pre></div>
 </div>
 <div id="using-magrittr" class="section level2">
 <h2>Using <code>magrittr</code></h2>
 <p>One can notice that the result of the previous function is passed to the next function. In order to avoid naming all the intermediate objects or using a function composition, it possible to utilize a power of the pipe operator from <code>magrittr</code>. The above code can be rewritten with:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">library</span>(magrittr)</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">rates_indx &lt;-<span class="st"> </span><span class="kw">get_prices_from_tickers</span>(<span class="st">&quot;^STOXX50E&quot;</span>,</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">rates_indx &lt;-<span class="st"> </span><span class="kw">get_prices_from_tickers</span>(<span class="st">&quot;^N100&quot;</span>,</a>
 <a class="sourceLine" id="cb6-4" data-line-number="4">                                      <span class="dt">start =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2000-01-01&quot;</span>),</a>
 <a class="sourceLine" id="cb6-5" data-line-number="5">                                      <span class="dt">end =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2002-01-01&quot;</span>),</a>
 <a class="sourceLine" id="cb6-6" data-line-number="6">                                      <span class="dt">quote =</span> <span class="st">&quot;Close&quot;</span>,</a>
