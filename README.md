@@ -1,6 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# estudy2
+# estudy2 <img src="man/figures/logo.png" align="right" width="120" />
 
 [![Travis-CI Build
 Status](https://api.travis-ci.org/irudnyts/estudy2.svg?branch=master)](https://api.travis-ci.org/irudnyts/estudy2.svg?branch=master)
@@ -38,3 +38,16 @@ To install the development version of estudy2 use:
 # library("devtools")
 devtools::install_github("irudnyts/estudy2")
 ```
+
+## Demo
+
+The package is equipped with a demonstration Shiny app that can be run
+locally with:
+
+``` r
+library("estudy2")
+run_app()
+```
+
+Otherwise, one can explore the deployed version using this
+[link](https://irudnyts.shinyapps.io/estudy2/).

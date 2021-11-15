@@ -24,26 +24,24 @@
 #' @seealso \code{\link[quantmod]{getSymbols}}
 #'
 #' @examples
-#' ## Download historical prices of nine European insurance companies'
-#' ## stocks:
+#' ## Download historical prices of seven companies' stocks:
 #' \dontrun{
 #' library("magrittr")
-#' tickers <- c("ALV.DE", "CS.PA", "G.MI", "HNR1.HA", "HSX.L", "MUV2.DE",
-#'              "TOP.CO")
+#' tickers <- c("AMZN", "ZM", "UBER", "NFLX", "SHOP", "FB", "UPWK")
 #' prices <- tickers %>%
-#'     get_prices_from_tickers(start = as.Date("2000-01-01"),
-#'                             end = as.Date("2002-01-01"),
+#'     get_prices_from_tickers(start = as.Date("2019-04-01"),
+#'                             end = as.Date("2020-04-01"),
 #'                             quote = "Close",
 #'                             retclass = "zoo")
 #' }
 #' ## The result of the above code is stored in:
 #' data(prices)
 #'
-#' ## Download historical prices of ESTX50 EUR P index:
+#' ## Download historical prices of S&P 500 index:
 #' \dontrun{
-#' prices_indx <- get_prices_from_tickers("^N100",
-#'                                        start = as.Date("2000-01-01"),
-#'                                        end = as.Date("2002-01-01"),
+#' prices_indx <- get_prices_from_tickers("^GSPC",
+#'                                        start = as.Date("2019-04-01"),
+#'                                        end = as.Date("2020-04-01"),
 #'                                        quote = "Close",
 #'                                        retclass = "zoo")
 #' }
@@ -57,6 +55,10 @@ get_prices_from_tickers <- function(..., start, end,
     quote <- match.arg(quote)
     retclass <- match.arg(retclass)
     tickers <- c(...)
+    if (!curl::has_internet()) {
+        message("Please make sure you have an internet connection.")
+        return(invisible(NULL))
+    }
     # for avoiding check inside the loop, the if/else is done outside the loop,
     # that is why so many repetition of the code. Done for optimality and speed.
     if(retclass == "list") {

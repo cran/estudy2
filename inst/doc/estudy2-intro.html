@@ -12,7 +12,7 @@
 
 <meta name="author" content="Iegor Rudnytskyi" />
 
-<meta name="date" content="2021-08-16" />
+<meta name="date" content="2021-11-15" />
 
 <title>Introduction to estudy2</title>
 
@@ -141,7 +141,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <h1 class="title toc-ignore">Introduction to estudy2</h1>
 <h4 class="author">Iegor Rudnytskyi</h4>
-<h4 class="date">2021-08-16</h4>
+<h4 class="date">2021-11-15</h4>
 
 
 
@@ -165,22 +165,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><code>parametric_tests</code> and <code>nonparametric_tests</code> performs parametric and nonparametric tests, respectively</p></li>
 </ul>
 <p>The package is designed to work with one of the data types, namely <code>zoo</code>, <code>list</code>, or <code>data.frame</code> depending on user preference.</p>
-<p>The purpose of this vignette is to provide a brief introduction of how to use this package. The illustrative example is the analysis of the impact of 9/11 terrorist attacks on World Trading Center on eight European insurance companies.</p>
+<p>The purpose of this vignette is to provide a brief introduction of how to use this package. The illustrative example is the analysis of the impact of the COVID-19 lockdown introduction on seven companies, which could profit from it.</p>
 </div>
 <div id="obtaining-prices-of-companies-stocks" class="section level2">
 <h2>Obtaining prices of companies’ stocks</h2>
-<p>We select eight European insurance companies, tickers of which are listed in the code snippet below. The starting and ending date are set to <code>&quot;2000-01-01&quot;</code> and <code>&quot;2002-01-01&quot;</code>, respectively, in order to include both the estimation and the event periods. Then, prices of securities should be downloaded. The function <code>get_prices_from_tickers</code> downloads prices for companies’ tickers between <code>start</code> and <code>end</code> date. Under the hood, this function is a wrapper around <code>get.hist.quote</code> from <code>tseries</code>. The function can return either Open or Close quote (<code>quote</code> argument). Also one has to choose the returning class among <code>&quot;list&quot;</code>, <code>&quot;zoo&quot;</code>, and <code>&quot;data.frame&quot;</code>. Further in the vignette we use <code>zoo</code> objects. We download historical prices of companies with:</p>
+<p>We select seven companies that could profit from COVID-19 lockdown, tickers of which are listed in the code snippet below. The starting and ending date are set to <code>&quot;2019-04-01&quot;</code> and <code>&quot;2020-04-01&quot;</code>, respectively, in order to include both the estimation and the event periods. Then, prices of securities should be downloaded. The function <code>get_prices_from_tickers</code> downloads prices for companies’ tickers between <code>start</code> and <code>end</code> date. Under the hood, this function is a wrapper around <code>get.hist.quote</code> from <code>tseries</code>. The function can return either Open or Close quote (<code>quote</code> argument). Also one has to choose the returning class among <code>&quot;list&quot;</code>, <code>&quot;zoo&quot;</code>, and <code>&quot;data.frame&quot;</code>. Further in the vignette we use <code>zoo</code> objects. We download historical prices of companies with:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(estudy2)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>tickers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ALV.DE&quot;</span>, <span class="st">&quot;CS.PA&quot;</span>, <span class="st">&quot;G.MI&quot;</span>, <span class="st">&quot;HNR1.HA&quot;</span>, <span class="st">&quot;HSX.L&quot;</span>, <span class="st">&quot;MUV2.DE&quot;</span>, <span class="st">&quot;TOP.CO&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>tickers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;AMZN&quot;</span>, <span class="st">&quot;ZM&quot;</span>, <span class="st">&quot;UBER&quot;</span>, <span class="st">&quot;NFLX&quot;</span>, <span class="st">&quot;SHOP&quot;</span>, <span class="st">&quot;FB&quot;</span>, <span class="st">&quot;UPWK&quot;</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>prices <span class="ot">&lt;-</span> <span class="fu">get_prices_from_tickers</span>(tickers, </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">start =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2000-01-01&quot;</span>),</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">end =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2002-01-01&quot;</span>),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">start =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2019-04-01&quot;</span>),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">end =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2020-04-01&quot;</span>),</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">quote =</span> <span class="st">&quot;Close&quot;</span>,</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">retclass =</span> <span class="st">&quot;zoo&quot;</span>)</span></code></pre></div>
 <p>For using a single-index market model we also need to download prices of an index (proxy):</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>prices_indx <span class="ot">&lt;-</span> <span class="fu">get_prices_from_tickers</span>(<span class="st">&quot;^N100&quot;</span>,</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">start =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2000-01-01&quot;</span>),</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">end =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2002-01-01&quot;</span>),</span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>prices_indx <span class="ot">&lt;-</span> <span class="fu">get_prices_from_tickers</span>(<span class="st">&quot;^GSPC&quot;</span>,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">start =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2019-04-01&quot;</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">end =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2020-04-01&quot;</span>),</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">quote =</span> <span class="st">&quot;Close&quot;</span>,</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">retclass =</span> <span class="st">&quot;zoo&quot;</span>)</span></code></pre></div>
 </div>
@@ -201,148 +201,94 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>Applying a market model</h2>
 <p>To calculate expected rates of returns during the event period we need to train a market model based on date from the estimation period. <code>apply_market_model</code> goes over each company (column) in <code>rates</code> and calibrates a chosen model. The function returns a list of S3 <code>returns</code> class objects, which can be passed to <code>parametric_tests</code> and <code>nonparametric_tests</code>. For our case we use the single-index market model:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>securities_returns <span class="ot">&lt;-</span> <span class="fu">apply_market_model</span>(</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">rates =</span> rates,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">regressor =</span> rates_indx,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">same_regressor_for_all =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">market_model =</span> <span class="st">&quot;sim&quot;</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimation_method =</span> <span class="st">&quot;ols&quot;</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimation_start =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2001-03-26&quot;</span>),</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimation_end =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2001-09-10&quot;</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">rates =</span> rates,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">regressor =</span> rates_indx,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">same_regressor_for_all =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">market_model =</span> <span class="st">&quot;sim&quot;</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">estimation_method =</span> <span class="st">&quot;ols&quot;</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">estimation_start =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2019-04-01&quot;</span>),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">estimation_end =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2020-03-13&quot;</span>)</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div id="tests" class="section level2">
 <h2>Tests</h2>
 <p>The event study utilizes both parametric and nonparametric tests. Parametric tests are Brown and Warner (1980), Brown and Warner (1985), t-test, Patell (1976), Boehmer (1991), and Lamb (1995) tests. To avoid calling all these tests separately, one can call <code>parametric_tests</code> with <code>all = TRUE</code>. The same applies to nonparametric tests, i.e. simple binomial sign, binomial sign, Corrado (1992), rank, modified rank, and Wilcoxon signed rank tests can be called all at once by specifying <code>all = TRUE</code> in <code>nonparametric_tests</code>. These tests are also available separately. Both functions return data frames with statistics and significance for each date in the event period. See <code>?parametric_tests</code> and <code>?nonparametric_tests</code> for references and more details.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">parametric_tests</span>(<span class="at">list_of_returns =</span> securities_returns,</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">event_start =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2001-09-11&quot;</span>),</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">event_end =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2001-09-28&quot;</span>))</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          date   weekday percentage         mean bw_1980_stat bw_1980_signif</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  2001-09-11   Tuesday        100 -0.095267547  -14.1375931            ***</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  2001-09-12 Wednesday        100 -0.031384102   -4.6573643            ***</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  2001-09-13  Thursday          0           NA           NA               </span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  2001-09-14    Friday        100 -0.037994921   -5.6384021            ***</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5  2001-09-17    Monday        100  0.023717979    3.5197204            ***</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  2001-09-18   Tuesday        100 -0.004574035   -0.6787815               </span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7  2001-09-19 Wednesday        100 -0.004380471   -0.6500568               </span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8  2001-09-20  Thursday        100 -0.097628194  -14.4879104            ***</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9  2001-09-21    Friday        100 -0.039622894   -5.8799914            ***</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 2001-09-24    Monday        100  0.031556552    4.6829556            ***</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 2001-09-25   Tuesday        100  0.041640460    6.1793958            ***</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 2001-09-26 Wednesday        100  0.022896229    3.3977737            ***</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13 2001-09-27  Thursday        100  0.020423192    3.0307779            ***</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14 2001-09-28    Friday        100  0.005078339    0.7536195               </span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    bw_1985_stat bw_1985_signif t_test_stat t_test_signif      pt_stat pt_signif</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   -12.8932767            ***  -4.8342919           *** -15.93199210       ***</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    -4.2474476            ***  -1.0197160                -3.02501512       ***</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3            NA                         NA                         NA          </span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4    -5.1421397            ***  -1.3785596                -6.04629140       ***</span></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5     3.2099332            ***   0.9005395                 4.87549214       ***</span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6    -0.6190387                 -0.1608414                -0.72885915          </span></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7    -0.5928423                 -0.2072312                -0.01540181          </span></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8   -13.2127608            ***  -2.3475394             * -13.28950663       ***</span></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9    -5.3624656            ***  -2.5106293            **  -6.18660223       ***</span></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10    4.2707865            ***   1.8657907                 4.66791310       ***</span></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11    5.6355179            ***   1.9867341             *   6.22810566       ***</span></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12    3.0987196            ***   4.3498111           ***   3.48075345       ***</span></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13    2.7640248            ***   1.8165741                 3.32642949       ***</span></span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14    0.6872899                  1.1444937                 1.02097492          </span></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         bh_stat bh_signif    lmb_stat lmb_signif</span></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  -4.033246415       *** -12.8350529        ***</span></span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  -0.757624918            -4.2061350        ***</span></span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3            NA                    NA           </span></span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  -1.443639802            -4.8579285        ***</span></span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5   1.271626024             3.1953793        ***</span></span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  -0.159962572            -0.6010351           </span></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7  -0.005548115            -0.5838091           </span></span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8  -2.800280643        ** -12.4856495        ***</span></span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9  -2.298184877         *  -5.2306013        ***</span></span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10  1.809375759             3.8950964        ***</span></span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11  2.231357971         *   5.5638463        ***</span></span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12  5.554167758       ***   3.0612478        ***</span></span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13  1.953042855         *   2.7451289        ***</span></span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14  1.228737963             0.6708057</span></span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a><span class="fu">nonparametric_tests</span>(<span class="at">list_of_returns =</span> securities_returns,</span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>                    <span class="at">event_start =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2001-09-11&quot;</span>),</span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>                    <span class="at">event_end =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2001-09-28&quot;</span>))</span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          date   weekday percentage  sign_stat sign_signif gsign_stat</span></span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  2001-09-11   Tuesday        100 -2.6457513         *** -2.5877375</span></span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  2001-09-12 Wednesday        100 -1.1338934             -1.0755080</span></span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  2001-09-13  Thursday          0         NA                     NA</span></span>
-<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  2001-09-14    Friday        100 -1.1338934             -1.0755080</span></span>
-<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5  2001-09-17    Monday        100  1.1338934              1.1928362</span></span>
-<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  2001-09-18   Tuesday        100  0.3779645              0.4367214</span></span>
-<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7  2001-09-19 Wednesday        100 -0.3779645             -0.3193933</span></span>
-<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8  2001-09-20  Thursday        100 -2.6457513         *** -2.5877375</span></span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9  2001-09-21    Friday        100 -1.1338934             -1.0755080</span></span>
-<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 2001-09-24    Monday        100  1.8898224           *  1.9489509</span></span>
-<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 2001-09-25   Tuesday        100  0.3779645              0.4367214</span></span>
-<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 2001-09-26 Wednesday        100  2.6457513         ***  2.7050657</span></span>
-<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13 2001-09-27  Thursday        100  1.1338934              1.1928362</span></span>
-<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14 2001-09-28    Friday        100 -0.3779645             -0.3193933</span></span>
-<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    gsign_signif csign_stat csign_signif  rank_stat rank_signif mrank_stat</span></span>
-<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1           *** -2.2292016           ** -3.4115930         *** -3.4115930</span></span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2               -0.9553721              -1.0640921             -1.0640921</span></span>
-<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3                       NA                      NA                     NA</span></span>
-<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4               -0.9553721              -1.6083224             -1.6083224</span></span>
-<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5                0.9553721               1.1128291              1.1128291</span></span>
-<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6                0.3184574               0.6741958              0.6741958</span></span>
-<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7               -0.3184574              -0.2274395             -0.2274395</span></span>
-<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8           *** -2.2292016           ** -3.4115930         *** -3.4115930</span></span>
-<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9               -0.9553721              -1.7707792           * -1.7707792</span></span>
-<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10            *  1.5922868               2.2987639          **  2.2987639</span></span>
-<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11               0.3184574               1.3808829              1.3808829</span></span>
-<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12          ***  2.2292016           **  2.7211516         ***  2.7211516</span></span>
-<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13               0.6369147               1.4296199              1.4296199</span></span>
-<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14              -0.3184574               0.5604760              0.5604760</span></span>
-<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    mrank_signif wlcx_stat wlcx_signif</span></span>
-<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1           ***         0         ***</span></span>
-<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2                       9            </span></span>
-<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3                      NA            </span></span>
-<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4                       5            </span></span>
-<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5                      20            </span></span>
-<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6                      16            </span></span>
-<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7                      12            </span></span>
-<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8           ***         0         ***</span></span>
-<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9             *         3          **</span></span>
-<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10           **        22           *</span></span>
-<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11                     22           *</span></span>
-<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12          ***        28         ***</span></span>
-<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13                     23           *</span></span>
-<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14                     18</span></span></code></pre></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">event_start =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2020-03-16&quot;</span>),</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">event_end =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2020-03-20&quot;</span>))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         date   weekday percentage        mean bw_1980_stat bw_1980_signif</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 2020-03-16    Monday        100  0.02329740     2.486449             **</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2020-03-17   Tuesday        100 -0.03157867    -3.370281            ***</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 2020-03-18 Wednesday        100 -0.01617850    -1.726675              *</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 2020-03-19  Thursday        100  0.07672027     8.188085            ***</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 2020-03-20    Friday        100  0.05840545     6.233409            ***</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   bw_1985_stat bw_1985_signif t_test_stat t_test_signif    pt_stat pt_signif</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1     1.858514              *   1.3941497                2.5507399        **</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    -2.519140             **  -1.2769075               -2.9495613       ***</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    -1.290615                 -0.4023135                0.3283654          </span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4     6.120241            ***   1.7958275                8.4216222       ***</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5     4.659205            ***   5.1233281           ***  6.3196352       ***</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       bh_stat bh_signif  lmb_stat lmb_signif</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  1.20471169            1.620049           </span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 -1.17531339           -2.435456         **</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  0.07606284           -1.254626           </span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  2.16657728         *  6.105794        ***</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5  8.65212561       ***  4.565195        ***</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="fu">nonparametric_tests</span>(<span class="at">list_of_returns =</span> securities_returns,</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>                    <span class="at">event_start =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2020-03-16&quot;</span>),</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>                    <span class="at">event_end =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2020-03-20&quot;</span>))</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         date   weekday percentage sign_stat sign_signif gsign_stat gsign_signif</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 2020-03-16    Monday        100 1.1338934              1.1516761             </span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2020-03-17   Tuesday        100 0.3779645              0.3957301             </span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 2020-03-18 Wednesday        100 1.1338934              1.1516761             </span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 2020-03-19  Thursday        100 1.8898224           *  1.9076220            *</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 2020-03-20    Friday        100 2.6457513         ***  2.6635680          ***</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   csign_stat csign_signif  rank_stat rank_signif mrank_stat mrank_signif</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  0.8636930               0.7962064              0.8499246             </span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  0.2878977              -0.1857202             -0.2283881             </span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  0.8636930               1.0205417              0.9865178             </span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  1.4394883               2.1127972          **  2.1665371           **</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5  2.0152836           **  2.9255529         ***  2.9786668          ***</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   wlcx_stat wlcx_signif</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1        23           *</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        10            </span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3        15            </span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4        27         ***</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5        28         ***</span></span></code></pre></div>
 </div>
 <div id="using-magrittr" class="section level2">
 <h2>Using <code>magrittr</code></h2>
 <p>One can notice that the result of the previous function is passed to the next function. In order to avoid naming all the intermediate objects or using a function composition, it possible to utilize a power of the pipe operator from <code>magrittr</code>. The above code can be rewritten with:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>rates_indx <span class="ot">&lt;-</span> <span class="fu">get_prices_from_tickers</span>(<span class="st">&quot;^N100&quot;</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">start =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2000-01-01&quot;</span>),</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">end =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2002-01-01&quot;</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>rates_indx <span class="ot">&lt;-</span> <span class="fu">get_prices_from_tickers</span>(<span class="st">&quot;^GSPC&quot;</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">start =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2019-04-01&quot;</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">end =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2020-04-01&quot;</span>),</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">quote =</span> <span class="st">&quot;Close&quot;</span>,</span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">retclass =</span> <span class="st">&quot;zoo&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">get_rates_from_prices</span>(<span class="at">quote =</span> <span class="st">&quot;Close&quot;</span>,</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">multi_day =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">compounding =</span> <span class="st">&quot;continuous&quot;</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_rates_from_prices</span>(<span class="at">quote =</span> <span class="st">&quot;Close&quot;</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">multi_day =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">compounding =</span> <span class="st">&quot;continuous&quot;</span>)</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>tickers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ALV.DE&quot;</span>, <span class="st">&quot;CS.PA&quot;</span>, <span class="st">&quot;G.MI&quot;</span>, <span class="st">&quot;HNR1.HA&quot;</span>, <span class="st">&quot;HSX.L&quot;</span>, <span class="st">&quot;MUV2.DE&quot;</span>, <span class="st">&quot;TOP.CO&quot;</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>tickers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;AMZN&quot;</span>, <span class="st">&quot;ZM&quot;</span>, <span class="st">&quot;UBER&quot;</span>, <span class="st">&quot;NFLX&quot;</span>, <span class="st">&quot;SHOP&quot;</span>, <span class="st">&quot;FB&quot;</span>, <span class="st">&quot;UPWK&quot;</span>)</span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>nine_eleven_param <span class="ot">&lt;-</span> <span class="fu">get_prices_from_tickers</span>(tickers,</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">start =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2000-01-01&quot;</span>),</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">end =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2002-01-01&quot;</span>),</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>param_tests <span class="ot">&lt;-</span> <span class="fu">get_prices_from_tickers</span>(tickers,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">start =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2019-04-01&quot;</span>),</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">end =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2020-04-01&quot;</span>),</span>
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">quote =</span> <span class="st">&quot;Close&quot;</span>,</span>
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">retclass =</span> <span class="st">&quot;zoo&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">get_rates_from_prices</span>(<span class="at">quote =</span> <span class="st">&quot;Close&quot;</span>,</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>                          <span class="at">multi_day =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>                          <span class="at">compounding =</span> <span class="st">&quot;continuous&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">apply_market_model</span>(<span class="at">regressor =</span> rates_indx,</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>                       <span class="at">same_regressor_for_all =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>                       <span class="at">market_model =</span> <span class="st">&quot;sim&quot;</span>,</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>                       <span class="at">estimation_method =</span> <span class="st">&quot;ols&quot;</span>,</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>                       <span class="at">estimation_start =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2001-03-26&quot;</span>),</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>                       <span class="at">estimation_end =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2001-09-10&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">parametric_tests</span>(<span class="at">event_start =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2001-09-11&quot;</span>),</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>                     <span class="at">event_end =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2001-09-28&quot;</span>))</span></code></pre></div>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_rates_from_prices</span>(<span class="at">quote =</span> <span class="st">&quot;Close&quot;</span>,</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>                        <span class="at">multi_day =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>                        <span class="at">compounding =</span> <span class="st">&quot;continuous&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">apply_market_model</span>(<span class="at">regressor =</span> rates_indx,</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>                     <span class="at">same_regressor_for_all =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>                     <span class="at">market_model =</span> <span class="st">&quot;sim&quot;</span>,</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>                     <span class="at">estimation_method =</span> <span class="st">&quot;ols&quot;</span>,</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>                     <span class="at">estimation_start =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2019-04-01&quot;</span>),</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>                     <span class="at">estimation_end =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2020-03-13&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">parametric_tests</span>(<span class="at">event_start =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2020-03-16&quot;</span>),</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>                   <span class="at">event_end =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2020-03-20&quot;</span>))</span></code></pre></div>
 </div>
 
 
